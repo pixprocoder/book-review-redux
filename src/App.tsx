@@ -1,44 +1,38 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Grid, GridItem, Text } from "@chakra-ui/react";
 import "./App.css";
-import { useAppDispatch, useAppSelector } from "./redux/hooks/hooks";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "./redux/features/counterSlice";
+import TransitionExample from "./pages/test";
 
 function App() {
-  const count = useAppSelector((state) => state.counter.value);
-  const dispatch = useAppDispatch();
   return (
     <>
-      <h1>Hello world</h1>
-      <Flex gap={4} alignItems="center" justifyContent="center">
-        <Button
-          onClick={() => dispatch(increment())}
-          p={"10"}
-          colorScheme="blue"
-        >
-          increase
-        </Button>
-        <Box margin="12px" fontSize="6xl">
-          <span>{count}</span>
-        </Box>
-        <Button
-          onClick={() => dispatch(decrement())}
-          p={"10"}
-          colorScheme="blue"
-        >
-          decrease
-        </Button>
-        <Button
-          onClick={() => dispatch(incrementByAmount(3))}
-          p={"10"}
-          colorScheme="blue"
-        >
-          By 3
-        </Button>
-      </Flex>
+      <Grid
+        templateColumns={{
+          base: "1fr",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(2, 1fr)",
+          lg: "repeat(3, 1fr)",
+          xl: "repeat(4, 1fr)",
+          "2xl": "repeat(5, 1fr)",
+        }}
+        gap={6}
+        mx={{ base: 2, sm: 0 }}
+        justifyContent="center"
+      >
+        <GridItem w="100%" h="10" bg="blue.500" />
+        <GridItem w="100%" h="10" bg="blue.500" />
+        <GridItem w="100%" h="10" bg="blue.500" />
+        <GridItem w="100%" h="10" bg="blue.500" />
+        <GridItem w="100%" h="10" bg="blue.500" />
+      </Grid>
+      <Text
+        bgGradient="linear(to-l, #7928CA, #ce3df3)"
+        bgClip="text"
+        fontSize="6xl"
+        fontWeight="extrabold"
+      >
+        Welcome to Chakra UI
+      </Text>
+      <TransitionExample />
     </>
   );
 }

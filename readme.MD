@@ -6,6 +6,7 @@
 => React Router dom
 => React Redux
 => Chakra-ui
+=> chakra-ui/icons
 => emotion/react
 => Framer-motion
 
@@ -14,3 +15,4 @@
 1. Project setup
 2. Basic Packages install
 3. Router setup
+4. Redux setup completed
