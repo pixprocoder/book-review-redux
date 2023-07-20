@@ -2,13 +2,14 @@
 
 ## Packages and technologies
 
-=> React
-=> React Router dom
-=> React Redux
-=> Chakra-ui
+=> react
+=> react Router dom
+=> react Redux
+=> chakra-ui
 => chakra-ui/icons
 => emotion/react
-=> Framer-motion
+=> framer-motion
+=> react-icons
 
 ### Working Process
 
@@ -16,3 +17,5 @@
 2. Basic Packages install
 3. Router setup
 4. Redux setup completed
+5. Header created
+6. Login page created
