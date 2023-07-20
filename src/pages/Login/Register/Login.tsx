@@ -39,7 +39,7 @@ function Login() {
               <Input name="password" type="password" />
             </FormControl>
             <Button w="100%" mt="4" type="submit">
-              Submit
+              Login
             </Button>
           </form>
           <Divider my="4" />

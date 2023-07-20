@@ -1,11 +1,5 @@
-import Login from "../../Login/Register/Login";
-
 function Home() {
-  return (
-    <section>
-      <Login />
-    </section>
-  );
+  return <section></section>;
 }
 
 export default Home;
