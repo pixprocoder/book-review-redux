@@ -19,6 +19,8 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
+import logo from "../../assets/images/logo/black-logo.svg";
+
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -33,7 +35,7 @@ function Header() {
                 fontSize={{ base: "16px", md: "20px", lg: "24px" }}
                 color="black"
               >
-                BookReview
+                <img width={150} src={logo} alt="logo" />
               </Button>
             </Box>
           </Flex>
