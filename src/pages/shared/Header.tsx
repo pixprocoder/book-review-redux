@@ -20,6 +20,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 import logo from "../../assets/images/logo/black-logo.svg";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
@@ -35,7 +36,9 @@ function Header() {
                 fontSize={{ base: "16px", md: "20px", lg: "24px" }}
                 color="black"
               >
-                <img width={150} src={logo} alt="logo" />
+                <Link to="/">
+                  <img width={150} src={logo} alt="logo" />
+                </Link>
               </Button>
             </Box>
           </Flex>
@@ -53,7 +56,10 @@ function Header() {
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            <Menu>
+            <Button variant="ghost" color="black" mr={2}>
+              <Link to="/login">Login</Link>
+            </Button>
+            {/* <Menu>
               <MenuButton as={Wrap} cursor="pointer">
                 <WrapItem>
                   <Avatar
@@ -74,7 +80,7 @@ function Header() {
                   <MenuItem>FAQ</MenuItem>
                 </MenuGroup>
               </MenuList>
-            </Menu>
+            </Menu> */}
           </Box>
 
           {/* <Spacer /> */}

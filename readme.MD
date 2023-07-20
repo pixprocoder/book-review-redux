@@ -2,14 +2,15 @@
 
 ## Packages and technologies
 
-=> react
-=> react Router dom
-=> react Redux
-=> chakra-ui
-=> chakra-ui/icons
-=> emotion/react
-=> framer-motion
-=> react-icons
+- react
+- react Router dom
+- react Redux
+- chakra-ui
+- chakra-ui/icons
+- emotion/react
+- framer-motion
+- react-icons
+- firebase
 
 ### Working Process
 

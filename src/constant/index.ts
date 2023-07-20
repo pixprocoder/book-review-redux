@@ -1,4 +1,7 @@
-type ILoginUser = {
-  email: string;
-  password: string;
+export type IBooks = {
+  title: string;
+  author: string;
+  genre: string;
+  publicationDate: string;
+  image: string;
 };
