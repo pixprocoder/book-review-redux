@@ -6,12 +6,17 @@ import {
   Button,
   Center,
   Divider,
+  Flex,
   FormControl,
   FormLabel,
   HStack,
   Input,
+  Text,
 } from "@chakra-ui/react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import auth from "../../../lib/firebase/firebase.config";
 
 function Login() {
   const handleLogin = (e: React.FormEvent) => {
@@ -19,8 +24,18 @@ function Login() {
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email);
-    console.log(password);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
   return (
     <section>
@@ -42,7 +57,18 @@ function Login() {
               Login
             </Button>
           </form>
-          <Center my={2}>Or connect with</Center>
+          <Box
+            display="flex"
+            justifyContent="center"
+            gap={2}
+            alignItems="center"
+          >
+            <Center my={2}>Or connect with </Center>
+            <Text textDecoration="underline" fontSize={12}>
+              <Link to="/register">Please Register</Link>
+            </Text>
+          </Box>
+
           <Box>
             <HStack display="flex" justifyContent="center">
               <Button colorScheme="twitter" leftIcon={<FaGoogle />}></Button>

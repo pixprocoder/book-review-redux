@@ -7,7 +7,7 @@ function Books() {
   const [books, setBooks] = useState<IBooks[]>([]);
 
   useEffect(() => {
-    fetch("data.json")
+    fetch("https://bookreview-iuzc.onrender.com/books")
       .then((res) => res.json())
       .then((data) => setBooks(data));
   }, []);

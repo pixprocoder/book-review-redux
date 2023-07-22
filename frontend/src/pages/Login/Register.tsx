@@ -11,7 +11,9 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import auth from "../../lib/firebase/firebase.config";
 
 function Register() {
   const handleRegister = (e: React.FormEvent) => {
@@ -19,8 +21,16 @@ function Register() {
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email);
-    console.log(password);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <section>
@@ -48,16 +58,10 @@ function Register() {
           </form>
           <Divider my="4" />
           <Box>
-            <HStack display="flex" justifyContent="space-between">
-              <Button colorScheme="facebook" leftIcon={<FaGoogle />}>
-                Facebook
-              </Button>
-              <Button colorScheme="twitter" leftIcon={<FaTwitter />}>
-                Twitter
-              </Button>
-              <Button colorScheme="twitter" leftIcon={<FaGithub />}>
-                GitHub
-              </Button>
+            <HStack display="flex" justifyContent="center">
+              <Button colorScheme="twitter" leftIcon={<FaGoogle />}></Button>
+              <Button colorScheme="twitter" leftIcon={<FaTwitter />}></Button>
+              <Button colorScheme="twitter" leftIcon={<FaGithub />}></Button>
             </HStack>
           </Box>
         </Box>
