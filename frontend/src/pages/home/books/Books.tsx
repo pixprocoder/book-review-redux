@@ -2,6 +2,7 @@ import { Input, Box, Button, Grid } from "@chakra-ui/react";
 import SingleBook from "./SingleBook";
 import { useEffect, useState } from "react";
 import { IBooks } from "../../../constant";
+import { FaFilter } from "react-icons/fa";
 
 function Books() {
   const [books, setBooks] = useState<IBooks[]>([]);
@@ -17,6 +18,9 @@ function Books() {
       <Box gap={4} mt={4} display="flex" w="50%" mx="auto">
         <Input placeholder="Search by anything" />
         <Button>Search</Button>
+        <Button>
+          <FaFilter />{" "}
+        </Button>
       </Box>
       <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
         {books.map((book) => (

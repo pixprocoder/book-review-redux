@@ -11,27 +11,25 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import auth from "../../lib/firebase/firebase.config";
+import { createUser } from "../../redux/features/user/userSlice";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+
+interface IFormInput {
+  name: string;
+  email: string;
+  password: string;
+}
 
 function Register() {
-  const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm<IFormInput>();
+  const onSubmit: SubmitHandler<IFormInput> = ({ name, email, password }) => {
+    dispatch(createUser({ email: email, password: password }));
   };
+
   return (
     <section>
       <Box w="50%" bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
@@ -39,18 +37,27 @@ function Register() {
           Please Register
         </Center>
         <Box>
-          <form onSubmit={handleRegister}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Your Name *</FormLabel>
-              <Input name="name" type="text" />
+              <Input {...register("name")} name="name" type="text" />
             </FormControl>
             <FormControl>
               <FormLabel mt={4}>Your Email *</FormLabel>
-              <Input name="email" type="email" />
+              <Input
+                {...register("email")}
+                name="email"
+                required
+                type="email"
+              />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
-              <Input name="password" type="password" />
+              <Input
+                {...register("password")}
+                name="password"
+                type="password"
+              />
             </FormControl>
             <Button w="100%" mt="4" type="submit">
               Register
