@@ -1,19 +1,29 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import {
   Box,
   Button,
   Center,
-  Divider,
   FormControl,
   FormLabel,
   HStack,
   Input,
 } from "@chakra-ui/react";
+
+import {
+  useSignInWithGithub,
+  useSignInWithGoogle,
+  useSignInWithTwitter,
+} from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import auth from "../../../firebase/firebase.init";
 
 function Login() {
+  // Social provider
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithTwitter, tUser, tLoading, tError] =
+    useSignInWithTwitter(auth);
+  const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
+    useSignInWithGithub(auth);
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -45,9 +55,21 @@ function Login() {
           <Center my={2}>Or connect with</Center>
           <Box>
             <HStack display="flex" justifyContent="center">
-              <Button colorScheme="twitter" leftIcon={<FaGoogle />}></Button>
-              <Button colorScheme="twitter" leftIcon={<FaTwitter />}></Button>
-              <Button colorScheme="twitter" leftIcon={<FaGithub />}></Button>
+              <Button
+                onClick={() => signInWithGoogle()}
+                colorScheme="twitter"
+                leftIcon={<FaGoogle />}
+              ></Button>
+              <Button
+                onClick={() => signInWithTwitter()}
+                colorScheme="twitter"
+                leftIcon={<FaTwitter />}
+              ></Button>
+              <Button
+                onClick={() => signInWithGithub()}
+                colorScheme="twitter"
+                leftIcon={<FaGithub />}
+              ></Button>
             </HStack>
           </Box>
         </Box>
