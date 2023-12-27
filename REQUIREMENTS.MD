@@ -11,4 +11,5 @@
 ## working
 
 - authentication firebase ✅
-- navigation bar header
+- navigation bar header ✅
+- redux managing authentication
