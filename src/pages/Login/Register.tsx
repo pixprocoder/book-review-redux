@@ -48,16 +48,10 @@ function Register() {
           </form>
           <Divider my="4" />
           <Box>
-            <HStack display="flex" justifyContent="space-between">
-              <Button colorScheme="facebook" leftIcon={<FaGoogle />}>
-                Facebook
-              </Button>
-              <Button colorScheme="twitter" leftIcon={<FaTwitter />}>
-                Twitter
-              </Button>
-              <Button colorScheme="twitter" leftIcon={<FaGithub />}>
-                GitHub
-              </Button>
+            <HStack display="flex" justifyContent="center">
+              <Button colorScheme="twitter" leftIcon={<FaGoogle />}></Button>
+              <Button colorScheme="twitter" leftIcon={<FaTwitter />}></Button>
+              <Button colorScheme="twitter" leftIcon={<FaGithub />}></Button>
             </HStack>
           </Box>
         </Box>
