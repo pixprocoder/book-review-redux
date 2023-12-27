@@ -15,7 +15,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../../firebase/firebase.init";
-
+// import end
 function Login() {
   // Social provider
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);

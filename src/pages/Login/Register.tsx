@@ -11,9 +11,23 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
+import {
+  useSignInWithGithub,
+  useSignInWithGoogle,
+  useSignInWithTwitter,
+} from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import auth from "../../firebase/firebase.init";
+// import end
 
 function Register() {
+  // Social provider
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithTwitter, tUser, tLoading, tError] =
+    useSignInWithTwitter(auth);
+  const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
+    useSignInWithGithub(auth);
+
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -49,9 +63,21 @@ function Register() {
           <Divider my="4" />
           <Box>
             <HStack display="flex" justifyContent="center">
-              <Button colorScheme="twitter" leftIcon={<FaGoogle />}></Button>
-              <Button colorScheme="twitter" leftIcon={<FaTwitter />}></Button>
-              <Button colorScheme="twitter" leftIcon={<FaGithub />}></Button>
+              <Button
+                onClick={() => signInWithGoogle()}
+                colorScheme="twitter"
+                leftIcon={<FaGoogle />}
+              ></Button>
+              <Button
+                onClick={() => signInWithTwitter()}
+                colorScheme="twitter"
+                leftIcon={<FaTwitter />}
+              ></Button>
+              <Button
+                onClick={() => signInWithGithub()}
+                colorScheme="twitter"
+                leftIcon={<FaGithub />}
+              ></Button>
             </HStack>
           </Box>
         </Box>
