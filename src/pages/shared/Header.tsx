@@ -56,31 +56,12 @@ function Header() {
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            <Button variant="ghost" color="black" mr={2}>
+            <Button colorScheme="blue" size="sm" mr={2}>
               <Link to="/login">Login</Link>
             </Button>
-            {/* <Menu>
-              <MenuButton as={Wrap} cursor="pointer">
-                <WrapItem>
-                  <Avatar
-                    size="sm"
-                    name="Dan Abrahmov"
-                    src="https://bit.ly/dan-abramov"
-                  />
-                </WrapItem>
-              </MenuButton>
-              <MenuList>
-                <MenuGroup title="Profile">
-                  <MenuItem>My Account</MenuItem>
-                  <MenuItem>Payments </MenuItem>
-                </MenuGroup>
-                <MenuDivider />
-                <MenuGroup title="Help">
-                  <MenuItem>Docs</MenuItem>
-                  <MenuItem>FAQ</MenuItem>
-                </MenuGroup>
-              </MenuList>
-            </Menu> */}
+            <Button colorScheme="blue" size="sm" mr={2}>
+              <Link to="/register">Register</Link>
+            </Button>
           </Box>
 
           {/* <Spacer /> */}
