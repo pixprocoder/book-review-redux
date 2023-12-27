@@ -15,7 +15,7 @@ import {
   useSignInWithTwitter,
 } from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import auth from "../../../firebase/firebase.init";
+import auth from "../../firebase/firebase.init";
 // import end
 function Login() {
   // Social provider
@@ -26,8 +26,6 @@ function Login() {
     useSignInWithGithub(auth);
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
-
-  console.log(user, loading, error);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

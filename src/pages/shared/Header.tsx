@@ -1,32 +1,31 @@
+import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
   Box,
-  Flex,
-  Spacer,
-  IconButton,
-  useDisclosure,
-  Collapse,
   Button,
+  Collapse,
   Container,
+  Flex,
+  IconButton,
   Menu,
   MenuButton,
-  MenuList,
+  MenuDivider,
   MenuGroup,
   MenuItem,
-  MenuDivider,
+  MenuList,
   Wrap,
   WrapItem,
-  Avatar,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-import logo from "../../assets/images/logo/black-logo.svg";
 import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo/black-logo.svg";
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box bg="gray.100" px={4} py={2}>
+    <Box bg="gray.50" px={4} py={2}>
       <Container maxW="container.xl" py={2}>
         <Flex alignItems="center" justifyContent="space-between">
           <Flex alignItems="center">
@@ -35,6 +34,7 @@ function Header() {
                 variant="ghost"
                 fontSize={{ base: "16px", md: "20px", lg: "24px" }}
                 color="black"
+                colorScheme="messenger"
               >
                 <Link to="/">
                   <img width={150} src={logo} alt="logo" />
@@ -43,23 +43,26 @@ function Header() {
             </Box>
           </Flex>
           <Box display={{ base: "none", md: "block" }}>
-            <Flex align="center">
-              <Button variant="ghost" color="black" mr={2}>
-                Home
+            <Flex align="center" gap="4">
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/">Home</Link>
               </Button>
-              <Button variant="ghost" color="black" mr={2}>
-                About
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/book">Books</Link>
               </Button>
-              <Button variant="ghost" color="black" mr={2}>
-                Contact
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/blog">Blog</Link>
+              </Button>
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/about">About</Link>
               </Button>
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            <Button colorScheme="blue" size="sm" mr={2}>
+            <Button colorScheme="messenger" variant="outline" size="sm" mr={2}>
               <Link to="/login">Login</Link>
             </Button>
-            <Button colorScheme="blue" size="sm" mr={2}>
+            <Button colorScheme="messenger" size="sm" mr={2}>
               <Link to="/register">Register</Link>
             </Button>
           </Box>
@@ -76,20 +79,24 @@ function Header() {
         </Flex>
         <Collapse in={isOpen} animateOpacity>
           <Box py={4}>
-            <Flex direction="column" alignItems="center">
-              <Button variant="ghost" color="black" my={2}>
-                Home
+            <Flex direction="column" alignItems="center" gap="3">
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/">Home</Link>
               </Button>
-              <Button variant="ghost" color="black" my={2}>
-                About
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/book">Books</Link>
               </Button>
-              <Button variant="ghost" color="black" my={2}>
-                Contact
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/blog">Blog</Link>
               </Button>
-              <Menu>
-                {/* <MenuButton as={Button} colorScheme="pink">
+              <Button colorScheme="messenger" variant="link">
+                <Link to="/about">About</Link>
+              </Button>
+
+              {/* <Menu>
+                <MenuButton as={Button} colorScheme="pink">
                   Profile
-                </MenuButton> */}
+                </MenuButton>
                 <MenuButton as={Wrap} cursor="pointer">
                   <WrapItem>
                     <Avatar
@@ -109,7 +116,18 @@ function Header() {
                     <MenuItem>FAQ</MenuItem>
                   </MenuGroup>
                 </MenuList>
-              </Menu>
+              </Menu> */}
+              <Button
+                colorScheme="messenger"
+                variant="outline"
+                size="sm"
+                mr={2}
+              >
+                <Link to="/login">Login</Link>
+              </Button>
+              <Button colorScheme="messenger" size="sm" mr={2}>
+                <Link to="/register">Register</Link>
+              </Button>
             </Flex>
           </Box>
         </Collapse>

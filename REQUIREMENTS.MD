@@ -11,4 +11,4 @@
 ## working
 
 - authentication firebase ✅
--
+- navigation bar header

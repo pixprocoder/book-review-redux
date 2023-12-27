@@ -1,20 +1,17 @@
 import {
-  Avatar,
   Box,
   Button,
-  CardBody,
-  Card,
-  CardHeader,
   ButtonGroup,
-  Stack,
-  Heading,
-  Text,
+  Card,
+  CardBody,
   Divider,
+  Heading,
   Image,
-  CardFooter,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
-import { FaComment, FaShare } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
+import { FaComment, FaShare } from "react-icons/fa";
 
 type Props = {
   title: string;
