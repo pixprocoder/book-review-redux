@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import {
+  useSignInWithEmailAndPassword,
   useSignInWithGithub,
   useSignInWithGoogle,
   useSignInWithTwitter,
@@ -23,14 +24,17 @@ function Login() {
     useSignInWithTwitter(auth);
   const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
     useSignInWithGithub(auth);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+
+  console.log(user, loading, error);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email);
-    console.log(password);
+    signInWithEmailAndPassword(email as string, password as string);
   };
   return (
     <section>

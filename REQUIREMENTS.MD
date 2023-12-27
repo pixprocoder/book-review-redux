@@ -4,6 +4,11 @@
         - social authentication
         - Register
 
+## Features
+
+-
+
 ## working
 
-- authentication firebase
+- authentication firebase ✅
+-
