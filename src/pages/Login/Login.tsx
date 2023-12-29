@@ -18,7 +18,7 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { login } from "../../redux/features/auth/authSlice";
+import { login, loginUser } from "../../redux/features/auth/authSlice";
 
 // import end
 function Login() {
@@ -31,15 +31,12 @@ function Login() {
   const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
     useSignInWithGithub(auth);
 
-  const [signInWithEmailAndPassword, eUser, eLoading, eError] =
-    useSignInWithEmailAndPassword(auth);
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-    signInWithEmailAndPassword(email as string, password as string);
+    dispatch(loginUser({ email, password }));
   };
   return (
     <section>
