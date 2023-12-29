@@ -16,15 +16,22 @@ import {
 } from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
+import { useState } from "react";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { login } from "../../redux/features/auth/authSlice";
+
 // import end
 function Login() {
-  // Social provider
+  const [error, setError] = useState("");
+  const dispatch = useAppDispatch();
+
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithTwitter, tUser, tLoading, tError] =
     useSignInWithTwitter(auth);
   const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
     useSignInWithGithub(auth);
-  const [signInWithEmailAndPassword, user, loading, error] =
+
+  const [signInWithEmailAndPassword, eUser, eLoading, eError] =
     useSignInWithEmailAndPassword(auth);
 
   const handleLogin = (e: React.FormEvent) => {

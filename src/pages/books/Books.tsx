@@ -1,7 +1,7 @@
 import { Input, Box, Button, Grid } from "@chakra-ui/react";
 import SingleBook from "./SingleBook";
 import { useEffect, useState } from "react";
-import { IBooks } from "../../../constant";
+import { IBooks } from "../../constant";
 
 function Books() {
   const [books, setBooks] = useState<IBooks[]>([]);

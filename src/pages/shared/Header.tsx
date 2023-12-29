@@ -1,20 +1,11 @@
 import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 import {
-  Avatar,
   Box,
   Button,
   Collapse,
   Container,
   Flex,
   IconButton,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuList,
-  Wrap,
-  WrapItem,
   useDisclosure,
 } from "@chakra-ui/react";
 
@@ -23,6 +14,8 @@ import logo from "../../assets/images/logo/black-logo.svg";
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
+
+  const user = null;
 
   return (
     <Box bg="gray.50" px={4} py={2}>
@@ -59,12 +52,33 @@ function Header() {
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            <Button colorScheme="messenger" variant="outline" size="sm" mr={2}>
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button colorScheme="messenger" size="sm" mr={2}>
-              <Link to="/register">Register</Link>
-            </Button>
+            {user ? (
+              <>
+                {user}
+                <Button
+                  colorScheme="messenger"
+                  variant="outline"
+                  size="sm"
+                  ml={2}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  colorScheme="messenger"
+                  variant="outline"
+                  size="sm"
+                  mr={2}
+                >
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button colorScheme="messenger" size="sm" mr={2}>
+                  <Link to="/register">Register</Link>
+                </Button>
+              </>
+            )}
           </Box>
 
           {/* <Spacer /> */}

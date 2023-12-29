@@ -20,3 +20,4 @@
 4. Redux setup completed
 5. Header created
 6. Login page created
+7. authentication

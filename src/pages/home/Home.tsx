@@ -1,9 +1,7 @@
-import Books from "../books/Books";
-
 function Home() {
   return (
     <section>
-      <Books />
+      <h1>This is home page</h1>
     </section>
   );
 }

@@ -12,4 +12,5 @@
 
 - authentication firebase ✅
 - navigation bar header ✅
+- Footer ✅
 - redux managing authentication

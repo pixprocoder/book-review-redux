@@ -12,34 +12,32 @@ import {
   Input,
 } from "@chakra-ui/react";
 import {
-  useCreateUserWithEmailAndPassword,
   useSignInWithGithub,
   useSignInWithGoogle,
   useSignInWithTwitter,
 } from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
-import { useState } from "react";
+import { createUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks/hooks";
 // import end
 
 function Register() {
+  const dispatch = useAppDispatch();
+
   // Social provider
   const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithTwitter, tUser, tLoading, tError] =
     useSignInWithTwitter(auth);
   const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
     useSignInWithGithub(auth);
-  const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-  console.log(user, loading, error);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const email = formData.get("email");
     const password = formData.get("password");
-
-    createUserWithEmailAndPassword(email as string, password as string);
+    dispatch(createUser({ email, password }));
   };
   return (
     <section>

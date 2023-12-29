@@ -22,7 +22,6 @@ type Props = {
 };
 
 function SingleBook({ title, author, genre, publicationDate, image }: Props) {
-  console.log(title, author, genre, publicationDate, image);
   return (
     <Card maxW="sm">
       <CardBody>
@@ -44,19 +43,6 @@ function SingleBook({ title, author, genre, publicationDate, image }: Props) {
         </Stack>
       </CardBody>
       <Divider />
-      <Box px={6} py={4}>
-        <ButtonGroup display="flex" justifyContent="space-between">
-          <Button variant="solid" colorScheme="gray">
-            <AiFillHeart />
-          </Button>
-          <Button variant="solid" colorScheme="gray">
-            <FaShare />
-          </Button>
-          <Button variant="solid" colorScheme="gray">
-            <FaComment />
-          </Button>
-        </ButtonGroup>
-      </Box>
     </Card>
   );
 }
