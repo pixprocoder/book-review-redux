@@ -24,7 +24,7 @@ import { Link, useNavigate } from "react-router-dom";
 // import end
 function Login() {
   const navigate = useNavigate();
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, isLoading } = useAppSelector((state) => state.auth);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
@@ -33,10 +33,10 @@ function Login() {
     e.preventDefault();
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
-    if (user?.email) {
+    dispatch(loginUser({ email, password }));
+    if (user?.email && !isLoading) {
       navigate("/");
     }
-    dispatch(loginUser({ email, password }));
 
     // reset form
     emailRef.current!.value = "";

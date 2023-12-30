@@ -13,15 +13,13 @@ function MainLayout() {
   useEffect(() => {
     dispatch(setLoading(true));
 
-    const unsubscribe = onAuthStateChanged(auth, (loggedInUser) => {
+    onAuthStateChanged(auth, (loggedInUser) => {
       if (loggedInUser?.email) {
         dispatch(setUser(loggedInUser.email));
         dispatch(setLoading(false));
       } else {
         setLoading(false);
       }
-
-      return () => unsubscribe();
     });
   }, []);
 

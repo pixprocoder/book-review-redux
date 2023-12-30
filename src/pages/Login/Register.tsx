@@ -2,50 +2,32 @@ import {
   Box,
   Button,
   Center,
-  Divider,
   FormControl,
   FormLabel,
-  HStack,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import {
-  useSignInWithGithub,
-  useSignInWithGoogle,
-  useSignInWithTwitter,
-} from "react-firebase-hooks/auth";
-import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import auth from "../../firebase/firebase.init";
+import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hooks/hooks";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 // import end
 
 function Register() {
-  // const toast = useToast();
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
 
-  // Social provider
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
-  const [signInWithTwitter] = useSignInWithTwitter(auth);
-  const [signInWithGithub] = useSignInWithGithub(auth);
-
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     const name = nameRef.current!.value;
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
+    console.log(name);
+
     dispatch(createUser({ email, password }));
-    // toast({
-    //   title: `Book created Successfully`,
-    //   position: "top",
-    //   status: "success",
-    //   isClosable: true,
-    // });
 
     // reset form
     nameRef.current!.value = "";

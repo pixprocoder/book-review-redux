@@ -16,9 +16,13 @@ import { Link, useParams } from "react-router-dom";
 import BookDetailCard from "./BookDetailCard";
 import BookReview from "./BookReview";
 import { useRef } from "react";
+import { useAppSelector } from "../../redux/hooks/hooks";
 
 const BookDetail = () => {
   const { id } = useParams();
+
+  const { user } = useAppSelector((state) => state.auth);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
   const handleConfirm = () => {
@@ -32,14 +36,16 @@ const BookDetail = () => {
       <Box display="flex" justifyContent="center" alignItems="center">
         <BookDetailCard />
       </Box>
-      <Box display="flex" justifyContent="center" alignItems="center" mt={6}>
-        <Button colorScheme="messenger" size="sm" ml={2}>
-          <Link to="/edit-book">Edit</Link>
-        </Button>
-        <Button onClick={onOpen} colorScheme="red" size="sm" ml={2}>
-          Delete
-        </Button>
-      </Box>
+      {user?.email && (
+        <Box display="flex" justifyContent="center" alignItems="center" mt={6}>
+          <Button colorScheme="messenger" size="sm" ml={2}>
+            <Link to="/edit-book">Edit</Link>
+          </Button>
+          <Button onClick={onOpen} colorScheme="red" size="sm" ml={2}>
+            Delete
+          </Button>
+        </Box>
+      )}
 
       {/* alert dialogue */}
       <AlertDialog
