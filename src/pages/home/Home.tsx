@@ -1,10 +1,11 @@
 import Banner from "./Banner";
+import TrendingBook from "./trending/Trending";
 
 function Home() {
   return (
     <section>
       <Banner />
-      <h1>Resent added books</h1>
+      <TrendingBook />
     </section>
   );
 }
