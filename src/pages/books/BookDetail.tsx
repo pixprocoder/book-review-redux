@@ -1,6 +1,7 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Grid, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import BookDetailCard from "./BookDetailCard";
+import BookReview from "./BookReview";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -17,6 +18,16 @@ const BookDetail = () => {
         <Button colorScheme="red" size="sm" ml={2}>
           Delete
         </Button>
+      </Box>
+
+      {/*  Reviews */}
+      <Box my={20}>
+        <Text fontSize="xl" mb={4}>
+          This book has - review
+        </Text>
+        <Grid templateColumns="repeat(4, 1fr)" gridGap={6}>
+          <BookReview />
+        </Grid>
       </Box>
     </Box>
   );
