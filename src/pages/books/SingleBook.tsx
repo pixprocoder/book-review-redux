@@ -21,6 +21,7 @@ function SingleBook({ title, publicationDate, image }: Props) {
     <Card maxW="sm">
       <CardBody>
         <Image
+          boxSize="50%"
           src={image}
           alt="Green double couch with wooden legs"
           borderRadius="lg"
@@ -37,7 +38,6 @@ function SingleBook({ title, publicationDate, image }: Props) {
           </Text>
         </Stack>
       </CardBody>
-      <Divider />
     </Card>
   );
 }

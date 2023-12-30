@@ -1,7 +1,18 @@
-import { Input, Box, Button, Grid } from "@chakra-ui/react";
+import {
+  Input,
+  Box,
+  Button,
+  Grid,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 import SingleBook from "./SingleBook";
 import { useEffect, useState } from "react";
 import { IBooks } from "../../constant";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
 function Books() {
   const [books, setBooks] = useState<IBooks[]>([]);
@@ -14,10 +25,31 @@ function Books() {
 
   return (
     <>
-      <Box gap={4} mt={4} display="flex" w="50%" mx="auto">
-        <Input placeholder="Search by anything" />
-        <Button>Search</Button>
-      </Box>
+      <Flex
+        gap={4}
+        my={10}
+        display="flex"
+        justifyContent="space-between"
+        w="100%"
+        mx="auto"
+      >
+        <Flex>
+          <Input placeholder="Search by anything" />
+          <Button ml={4}>Search</Button>
+        </Flex>
+        <Flex>
+          <Menu>
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+              Filter By
+            </MenuButton>
+            <MenuList>
+              <MenuItem>Author</MenuItem>
+              <MenuItem>Genre</MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
+      </Flex>
+
       <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
         {books.map((book) => (
           <SingleBook
