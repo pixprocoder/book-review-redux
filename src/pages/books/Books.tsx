@@ -8,20 +8,17 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Spinner,
 } from "@chakra-ui/react";
 import SingleBook from "./SingleBook";
 import { useEffect, useState } from "react";
 import { IBooks } from "../../constant";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+import { useGetBooksQuery } from "../../redux/api/apiSlice";
 
 function Books() {
-  const [books, setBooks] = useState<IBooks[]>([]);
-
-  useEffect(() => {
-    fetch("data.json")
-      .then((res) => res.json())
-      .then((data) => setBooks(data));
-  }, []);
+  const { data, isLoading } = useGetBooksQuery(undefined);
+  console.log(isLoading);
 
   return (
     <>
@@ -52,19 +49,36 @@ function Books() {
         </Flex>
       </Flex>
 
-      <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
-        {books.map((book) => (
-          <SingleBook
-            key={book.title}
-            id={book._id}
-            title={book.title}
-            author={book.author}
-            genre={book.genre}
-            publicationDate={book.publicationDate}
-            image={book.image}
+      {isLoading ? (
+        <Box
+          minH="90vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
           />
-        ))}
-      </Grid>
+        </Box>
+      ) : (
+        <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
+          {data?.data.map((book: any) => (
+            <SingleBook
+              key={book.title}
+              id={book._id}
+              title={book.title}
+              author={book.author}
+              genre={book.genre}
+              publicationDate={book.publicationDate}
+              image={book.image}
+            />
+          ))}
+        </Grid>
+      )}
     </>
   );
 }

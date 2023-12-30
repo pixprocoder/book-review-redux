@@ -1,3 +1,4 @@
+import Footer from "../shared/Footer";
 import Banner from "./Banner";
 import BestBooks from "./best-books/BestBooks";
 import Categories from "./categories/Categories";
@@ -16,6 +17,7 @@ function Home() {
       <Categories />
       <RecentBooks />
       <Reviews />
+      <Footer />
     </section>
   );
 }

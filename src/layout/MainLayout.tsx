@@ -3,10 +3,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import auth from "../firebase/firebase.init";
-import Footer from "../pages/shared/Footer";
 import Header from "../pages/shared/Header";
-import { useAppDispatch } from "../redux/hooks/hooks";
 import { setLoading, setUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks/hooks";
 
 function MainLayout() {
   const dispatch = useAppDispatch();
@@ -29,7 +28,6 @@ function MainLayout() {
       <Container maxW="container.xl">
         <Outlet />
       </Container>
-      <Footer />
     </>
   );
 }
