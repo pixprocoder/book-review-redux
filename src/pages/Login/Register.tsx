@@ -18,6 +18,7 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
 import { createUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
+import { Link } from "react-router-dom";
 // import end
 
 function Register() {
@@ -52,7 +53,7 @@ function Register() {
     passwordRef.current!.value = "";
   };
   return (
-    <section>
+    <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
       <Box w="50%" bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
         <Center fontSize={33} textColor="blue.400" fontWeight="bold">
           Please Register
@@ -76,12 +77,18 @@ function Register() {
                 type="password"
               />
             </FormControl>
-            <Button w="100%" mt="4" type="submit">
+            <Box my={2} fontSize="xs">
+              Already Have an Account?{" "}
+              <Button fontSize="xs" colorScheme="messenger" variant="link">
+                <Link to="/login"> Please Login </Link>
+              </Button>
+            </Box>
+            <Button colorScheme="messenger" w="100%" mt="4" type="submit">
               Register
             </Button>
           </form>
-          <Divider my="4" />
-          <Box>
+
+          {/* <Box>
             <HStack display="flex" justifyContent="center">
               <Button
                 onClick={() => signInWithGoogle()}
@@ -99,10 +106,10 @@ function Register() {
                 leftIcon={<FaGithub />}
               ></Button>
             </HStack>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
-    </section>
+    </Box>
   );
 }
 

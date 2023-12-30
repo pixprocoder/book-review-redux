@@ -13,7 +13,7 @@ import { useRef } from "react";
 
 const AlertDialogue = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = useRef<HTMLInputElement | null>(null);
+  const cancelRef = useRef<null>(null);
 
   return (
     <>
@@ -28,11 +28,12 @@ const AlertDialogue = () => {
         <AlertDialogOverlay />
 
         <AlertDialogContent>
-          <AlertDialogHeader>Discard Changes?</AlertDialogHeader>
+          <AlertDialogHeader>
+            The Book will be permanently deleted
+          </AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Are you sure you want to discard all of your notes? 44 words will be
-            deleted.
+            Are you sure you want to Delete title ?
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
