@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import Features from "./features/Features";
 import TrendingBook from "./trending/Trending";
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
     <section>
       <Banner />
       <TrendingBook />
+      <Features />
     </section>
   );
 }
