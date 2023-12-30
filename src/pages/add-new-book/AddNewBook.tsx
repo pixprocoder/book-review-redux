@@ -8,10 +8,12 @@ import {
   FormLabel,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
 const AddNewBook = () => {
+  const toast = useToast();
   const titleRef = useRef<HTMLInputElement | null>(null);
   const authorRef = useRef<HTMLInputElement | null>(null);
   const genreRef = useRef<HTMLInputElement | null>(null);
@@ -23,7 +25,20 @@ const AddNewBook = () => {
     const author = authorRef.current!.value;
     const genre = genreRef.current!.value;
     const image = imageRef.current!.value;
-    console.log(title, author, genre, image);
+    // console.log(title, author, genre, image);
+
+    // Reset form
+    titleRef.current!.value = "";
+    authorRef.current!.value = "";
+    genreRef.current!.value = "";
+    imageRef.current!.value = "";
+
+    toast({
+      title: `Book created Successfully`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
   };
 
   return (

@@ -56,6 +56,7 @@ function Books() {
         {books.map((book) => (
           <SingleBook
             key={book.title}
+            id={book._id}
             title={book.title}
             author={book.author}
             genre={book.genre}

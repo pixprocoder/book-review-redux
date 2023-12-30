@@ -8,6 +8,7 @@ import {
   HStack,
   Input,
 } from "@chakra-ui/react";
+import { useRef } from "react";
 import {
   useSignInWithGithub,
   useSignInWithGoogle,
@@ -17,10 +18,10 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
 import { createUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { useRef } from "react";
 // import end
 
 function Register() {
+  // const toast = useToast();
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -38,7 +39,12 @@ function Register() {
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
     dispatch(createUser({ email, password }));
-    console.log(name);
+    // toast({
+    //   title: `Book created Successfully`,
+    //   position: "top",
+    //   status: "success",
+    //   isClosable: true,
+    // });
 
     // reset form
     nameRef.current!.value = "";
