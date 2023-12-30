@@ -18,25 +18,25 @@ import {
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
 import { loginUser } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hooks/hooks";
-import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { Link, useNavigate } from "react-router-dom";
 
 // import end
 function Login() {
+  const navigate = useNavigate();
+  const { user } = useAppSelector((state) => state.auth);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
-
-  const [signInWithGoogle] = useSignInWithGoogle(auth);
-  const [signInWithTwitter] = useSignInWithTwitter(auth);
-  const [signInWithGithub] = useSignInWithGithub(auth);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
+    if (user?.email) {
+      navigate("/");
+    }
     dispatch(loginUser({ email, password }));
-    console.log(email, password);
 
     // reset form
     emailRef.current!.value = "";
