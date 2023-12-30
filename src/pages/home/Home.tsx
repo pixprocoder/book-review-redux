@@ -1,7 +1,10 @@
+import Carousel from "./Carousel";
+
 function Home() {
   return (
     <section>
-      <h1>This is home page</h1>
+      <Carousel />
+      <h1>Resent added books</h1>
     </section>
   );
 }
