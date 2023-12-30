@@ -20,9 +20,14 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
 import { createUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useRef } from "react";
 // import end
 
 function Register() {
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
   const dispatch = useAppDispatch();
 
   // Social provider
@@ -34,10 +39,15 @@ function Register() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const name = nameRef.current!.value;
+    const email = emailRef.current!.value;
+    const password = passwordRef.current!.value;
     dispatch(createUser({ email, password }));
+
+    // reset form
+    nameRef.current!.value = "";
+    emailRef.current!.value = "";
+    passwordRef.current!.value = "";
   };
   return (
     <section>
@@ -49,15 +59,20 @@ function Register() {
           <form onSubmit={handleRegister}>
             <FormControl>
               <FormLabel>Your Name *</FormLabel>
-              <Input name="name" type="text" />
+              <Input name="name" ref={nameRef} type="text" />
             </FormControl>
             <FormControl>
               <FormLabel mt={4}>Your Email *</FormLabel>
-              <Input name="email" type="email" />
+              <Input name="email" ref={emailRef} type="email" />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
-              <Input name="password" type="password" />
+              <Input
+                id="password"
+                ref={passwordRef}
+                name="password"
+                type="password"
+              />
             </FormControl>
             <Button w="100%" mt="4" type="submit">
               Register
