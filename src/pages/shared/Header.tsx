@@ -64,7 +64,14 @@ function Header() {
           <Box display={{ base: "none", md: "block" }}>
             {user?.email ? (
               <>
-                {user?.email}
+                <Button
+                  onClick={handleSignOut}
+                  colorScheme="messenger"
+                  size="sm"
+                  ml={2}
+                >
+                  Add New Book
+                </Button>
                 <Button
                   onClick={handleSignOut}
                   colorScheme="messenger"

@@ -35,7 +35,9 @@ function Books() {
       >
         <Flex>
           <Input placeholder="Search by anything" />
-          <Button ml={4}>Search</Button>
+          <Button colorScheme="messenger" ml={4}>
+            Search
+          </Button>
         </Flex>
         <Flex>
           <Menu>
@@ -43,8 +45,8 @@ function Books() {
               Filter By
             </MenuButton>
             <MenuList>
-              <MenuItem>Author</MenuItem>
               <MenuItem>Genre</MenuItem>
+              <MenuItem>Publication Year</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

@@ -1,7 +1,7 @@
 import {
+  Box,
   Card,
   CardBody,
-  Divider,
   Heading,
   Image,
   Stack,
@@ -20,22 +20,20 @@ function SingleBook({ title, publicationDate, image }: Props) {
   return (
     <Card maxW="sm">
       <CardBody>
-        <Image
-          boxSize="50%"
-          src={image}
-          alt="Green double couch with wooden legs"
-          borderRadius="lg"
-        />
+        <Box maxW="200px" m="auto">
+          <Image
+            boxSize="100%"
+            src={image}
+            alt="Green double couch with wooden legs"
+            borderRadius="lg"
+          />
+        </Box>
+
         <Stack mt="6" spacing="3">
           <Heading size="md">{title}</Heading>
-          <Text>
-            This sofa is perfect for modern tropical spaces, baroque inspired
-            spaces, earthy toned spaces and for people who love a chic design
-            with a sprinkle of vintage design.
-          </Text>
-          <Text color="blue.600" fontSize="2xl">
-            Publication Date: {publicationDate}
-          </Text>
+          <Text>Author: Kobir</Text>
+          <Text>Genre: Since</Text>
+          <Text>Publication Year: {publicationDate}</Text>
         </Stack>
       </CardBody>
     </Card>
