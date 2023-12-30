@@ -25,6 +25,7 @@ function Header() {
   const handleSignOut = () => {
     signOut(auth);
     dispatch(setUser(null));
+    // Todo: add toast
   };
 
   return (
