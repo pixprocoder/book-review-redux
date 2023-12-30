@@ -11,13 +11,21 @@ import {
 
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo/black-logo.svg";
-import { useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { signOut } from "firebase/auth";
+import auth from "../../firebase/firebase.init";
+import { setUser } from "../../redux/features/auth/authSlice";
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+  console.log(user.email);
 
-  const { email } = useAppSelector((state) => state.auth.user);
-  console.log(email);
+  const handleSignOut = () => {
+    signOut(auth);
+    dispatch(setUser(null));
+  };
 
   return (
     <Box bg="gray.50" px={4} py={2}>
@@ -54,10 +62,11 @@ function Header() {
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            {email ? (
+            {user?.email ? (
               <>
-                {email}
+                {user?.email}
                 <Button
+                  onClick={handleSignOut}
                   colorScheme="messenger"
                   variant="outline"
                   size="sm"
