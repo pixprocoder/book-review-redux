@@ -8,17 +8,16 @@ import {
   Input,
 } from "@chakra-ui/react";
 
+import { useRef } from "react";
 import {
-  useSignInWithEmailAndPassword,
   useSignInWithGithub,
   useSignInWithGoogle,
   useSignInWithTwitter,
 } from "react-firebase-hooks/auth";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import auth from "../../firebase/firebase.init";
-import { useRef, useState } from "react";
+import { loginUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { login, loginUser } from "../../redux/features/auth/authSlice";
 
 // import end
 function Login() {
@@ -26,11 +25,9 @@ function Login() {
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
 
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  const [signInWithTwitter, tUser, tLoading, tError] =
-    useSignInWithTwitter(auth);
-  const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
-    useSignInWithGithub(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [signInWithTwitter] = useSignInWithTwitter(auth);
+  const [signInWithGithub] = useSignInWithGithub(auth);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

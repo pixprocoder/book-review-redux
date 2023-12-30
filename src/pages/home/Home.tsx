@@ -1,9 +1,9 @@
-import Carousel from "./Carousel";
+import Banner from "./Banner";
 
 function Home() {
   return (
     <section>
-      <Carousel />
+      <Banner />
       <h1>Resent added books</h1>
     </section>
   );

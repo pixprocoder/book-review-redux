@@ -1,6 +1,6 @@
 import { Box, Image } from "@chakra-ui/react";
 
-const Carousel = () => {
+const Banner = () => {
   const staticImages = ["banner1.jpg", "banner2.jpg", "banner3.jpg"];
 
   return (
@@ -17,4 +17,4 @@ const Carousel = () => {
   );
 };
 
-export default Carousel;
+export default Banner;

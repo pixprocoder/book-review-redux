@@ -1,7 +1,4 @@
 import {
-  Box,
-  Button,
-  ButtonGroup,
   Card,
   CardBody,
   Divider,
@@ -10,8 +7,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { AiFillHeart } from "react-icons/ai";
-import { FaComment, FaShare } from "react-icons/fa";
 
 type Props = {
   title: string;
@@ -21,7 +16,7 @@ type Props = {
   image: string;
 };
 
-function SingleBook({ title, author, genre, publicationDate, image }: Props) {
+function SingleBook({ title, publicationDate, image }: Props) {
   return (
     <Card maxW="sm">
       <CardBody>

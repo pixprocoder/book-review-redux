@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import {
   Box,
   Button,
@@ -31,11 +28,9 @@ function Register() {
   const dispatch = useAppDispatch();
 
   // Social provider
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-  const [signInWithTwitter, tUser, tLoading, tError] =
-    useSignInWithTwitter(auth);
-  const [signInWithGithub, gitHubUser, gitHubLoading, gitHubError] =
-    useSignInWithGithub(auth);
+  const [signInWithGoogle] = useSignInWithGoogle(auth);
+  const [signInWithTwitter] = useSignInWithTwitter(auth);
+  const [signInWithGithub] = useSignInWithGithub(auth);
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +38,7 @@ function Register() {
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
     dispatch(createUser({ email, password }));
+    console.log(name);
 
     // reset form
     nameRef.current!.value = "";
