@@ -9,7 +9,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const SingleTrending = () => {
+const SingleReviewCard = () => {
   return (
     <Box>
       <Card>
@@ -27,4 +27,4 @@ const SingleTrending = () => {
   );
 };
 
-export default SingleTrending;
+export default SingleReviewCard;

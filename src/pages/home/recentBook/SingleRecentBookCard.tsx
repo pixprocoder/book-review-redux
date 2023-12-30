@@ -8,8 +8,9 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
+import React from "react";
 
-const SingleTrending = () => {
+const SingleRecentBookCard = () => {
   return (
     <Box>
       <Card>
@@ -27,4 +28,4 @@ const SingleTrending = () => {
   );
 };
 
-export default SingleTrending;
+export default SingleRecentBookCard;
