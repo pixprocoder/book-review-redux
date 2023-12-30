@@ -5,17 +5,25 @@ import { Outlet } from "react-router-dom";
 import auth from "../firebase/firebase.init";
 import Footer from "../pages/shared/Footer";
 import Header from "../pages/shared/Header";
+import { useAppDispatch } from "../redux/hooks/hooks";
+import { setLoading, setUser } from "../redux/features/auth/authSlice";
 
 function MainLayout() {
+  const dispatch = useAppDispatch();
   useEffect(() => {
+    dispatch(setLoading(true));
+
     const unsubscribe = onAuthStateChanged(auth, (loggedInUser) => {
-      if (loggedInUser) {
-        // setUser(loggedInUser);
+      if (loggedInUser?.email) {
+        dispatch(setUser(loggedInUser.email));
+        dispatch(setLoading(false));
+      } else {
+        setLoading(false);
       }
 
       return () => unsubscribe();
     });
-  });
+  }, []);
 
   return (
     <>

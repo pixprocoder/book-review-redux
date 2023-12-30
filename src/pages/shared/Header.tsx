@@ -11,11 +11,13 @@ import {
 
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo/black-logo.svg";
+import { useAppSelector } from "../../redux/hooks/hooks";
 
 function Header() {
   const { isOpen, onToggle } = useDisclosure();
 
-  const user = null;
+  const { email } = useAppSelector((state) => state.auth.user);
+  console.log(email);
 
   return (
     <Box bg="gray.50" px={4} py={2}>
@@ -52,9 +54,9 @@ function Header() {
             </Flex>
           </Box>
           <Box display={{ base: "none", md: "block" }}>
-            {user ? (
+            {email ? (
               <>
-                {user}
+                {email}
                 <Button
                   colorScheme="messenger"
                   variant="outline"
