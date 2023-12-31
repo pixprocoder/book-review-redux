@@ -6,6 +6,7 @@ import auth from "../firebase/firebase.init";
 import Header from "../pages/shared/Header";
 import { setLoading, setUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch } from "../redux/hooks/hooks";
+import Footer from "../pages/shared/Footer";
 
 function MainLayout() {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ function MainLayout() {
       <Container maxW="container.xl">
         <Outlet />
       </Container>
+      <Footer />
     </>
   );
 }

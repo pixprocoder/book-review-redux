@@ -18,7 +18,14 @@ type Props = {
   image: string;
 };
 
-function SingleBook({ id, title, publicationDate, image }: Props) {
+function SingleBook({
+  id,
+  title,
+  author,
+  genre,
+  publicationDate,
+  image,
+}: Props) {
   return (
     <Card maxW="sm">
       <Link to={`/book-detail/${id}`}>
@@ -34,9 +41,24 @@ function SingleBook({ id, title, publicationDate, image }: Props) {
 
           <Stack mt="6" spacing="3">
             <Heading size="md">{title}</Heading>
-            <Text>Author: Kobir</Text>
-            <Text>Genre: Since</Text>
-            <Text>Publication Year: {publicationDate}</Text>
+            <Text>
+              Author:{" "}
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {author}
+              </span>
+            </Text>
+            <Text>
+              Genre:{" "}
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {genre}
+              </span>
+            </Text>
+            <Text>
+              Publication Year:
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {publicationDate}
+              </span>
+            </Text>
           </Stack>
         </CardBody>
       </Link>

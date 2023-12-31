@@ -2,16 +2,15 @@ import { Box, Grid, useBreakpointValue } from "@chakra-ui/react";
 import FeaturesCard from "./FeaturesCard";
 
 const Features = () => {
-  const displayItem = useBreakpointValue({
-    base: 2,
-    sm: 2,
-    md: 3,
-    lg: 4,
+  const templateColumns = useBreakpointValue({
+    base: "1fr",
+    sm: "repeat(2, 1fr)",
+    md: "repeat(4, 1fr)",
   });
   return (
     <Box my={30}>
       <h1>Features</h1>
-      <Grid column={displayItem} gap={6}>
+      <Grid templateColumns={templateColumns} gap={6}>
         <FeaturesCard />
         <FeaturesCard />
         <FeaturesCard />
