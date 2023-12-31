@@ -92,7 +92,7 @@ const BookDetail = () => {
         <Text fontSize="xl" mb={4}>
           This book has - review
         </Text>
-        <Grid templateColumns="repeat(4, 1fr)" gridGap={6}>
+        <Grid>
           <BookReview />
         </Grid>
       </Box>

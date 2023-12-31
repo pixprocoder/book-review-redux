@@ -9,38 +9,96 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useGetBooksQuery } from "../../redux/api/apiSlice";
 import CustomLoading from "../shared/CustomLoading";
 import SingleBook from "./SingleBook";
-import { useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import {
+  setFilteredData,
+  setSearchTerm,
+  setSelectedFilter,
+} from "../../redux/features/searchSlice";
 
 function Books() {
-  const [selectedFilter, setSelectedFilter] = useState("");
-
+  const templateColumns = useBreakpointValue({
+    base: "1fr",
+    sm: "repeat(2, 1fr)",
+    md: "repeat(4, 1fr)",
+  });
+  const [selected, setSelected] = useState("All");
   const [searchText, setSearchText] = useState("");
+  const dispatch = useAppDispatch();
+  const { selectedFilter, searchTerm, filteredData } = useAppSelector(
+    (state) => state.search
+  );
+
+  const { data, isLoading } = useGetBooksQuery(undefined);
+
+  // filtering
+  useEffect(() => {
+    // Apply filtering logic based on selectedFilter
+    const filteredData = data?.data.filter((book: any) => {
+      if (selectedFilter === "All") {
+        return true;
+      }
+      if (
+        selectedFilter === "Author" &&
+        book.author.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return true;
+      }
+
+      if (
+        selectedFilter === "Genre" &&
+        book.genre.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return true;
+      }
+
+      if (
+        selectedFilter === "Year" &&
+        book.publicationDate.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return true;
+      }
+
+      return false;
+    });
+
+    // Dispatch the filtered data after performing the search
+    dispatch(setFilteredData(filteredData || []));
+  }, [selectedFilter, searchTerm, data, dispatch]);
+
+  const handleSearchTermChange = (newSearchTerm: string) => {
+    dispatch(setSearchTerm(newSearchTerm));
+  };
 
   // handling search
   const handleSearch = () => {
-    console.log("Search Text:", searchText);
+    dispatch(setSearchTerm(searchText));
+    setSearchText("");
   };
+
+  dispatch(setSelectedFilter(selected));
 
   // handling filter
   const handleAuthor = (e: any) => {
     const buttonValue = e.target.textContent;
-    setSelectedFilter(buttonValue);
+    setSelected(buttonValue);
   };
   const handleGenre = (e: any) => {
     const buttonValue = e.target.textContent;
-    setSelectedFilter(buttonValue);
+    setSelected(buttonValue);
   };
 
   const handlePublicationYear = (e: any) => {
     const buttonValue = e.target.textContent;
-    setSelectedFilter(buttonValue);
+    setSelected(buttonValue);
   };
 
-  const { data, isLoading } = useGetBooksQuery(undefined);
   return (
     <>
       <Flex
@@ -51,21 +109,22 @@ function Books() {
         w="100%"
         mx="auto"
       >
-        <Flex>
+        <Flex direction={{ base: "column", md: "row", lg: "row" }}>
           <Input
             placeholder={`${
-              selectedFilter
-                ? `searching by ${selectedFilter}`
-                : `Select A Filter First`
+              selected === "All"
+                ? `Select A Filter First`
+                : `searching by ${selected}`
             } `}
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            value={searchTerm}
+            onChange={(e) => handleSearchTermChange(e.target.value)}
           />
           <Button
-            isDisabled={!selectedFilter}
+            isDisabled={selected == "All"}
             onClick={handleSearch}
             colorScheme="messenger"
-            ml={4}
+            ml={[0, 2, 4, 4]}
+            mt={[2, 0, 0, 0]}
           >
             Search
           </Button>
@@ -75,15 +134,13 @@ function Books() {
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Filter By :{" "}
               <Text display="inline" color="blue">
-                {selectedFilter}
+                {selected}
               </Text>
             </MenuButton>
             <MenuList>
               <MenuItem onClick={handleAuthor}>Author</MenuItem>
               <MenuItem onClick={handleGenre}>Genre</MenuItem>
-              <MenuItem onClick={handlePublicationYear}>
-                Publication Year
-              </MenuItem>
+              <MenuItem onClick={handlePublicationYear}>Year</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
@@ -92,18 +149,30 @@ function Books() {
       {isLoading ? (
         <CustomLoading />
       ) : (
-        <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
-          {data?.data.map((book: any) => (
-            <SingleBook
-              key={book.title}
-              id={book._id}
-              title={book.title}
-              author={book.author}
-              genre={book.genre}
-              publicationDate={book.publicationDate}
-              image={book.image}
-            />
-          ))}
+        <Grid mt={4} templateColumns={templateColumns} gap={6}>
+          {data?.data === !filteredData
+            ? data?.data.map((book: any) => (
+                <SingleBook
+                  key={book.title}
+                  id={book._id}
+                  title={book.title}
+                  author={book.author}
+                  genre={book.genre}
+                  publicationDate={book.publicationDate}
+                  image={book.image}
+                />
+              ))
+            : filteredData.map((book: any) => (
+                <SingleBook
+                  key={book.title}
+                  id={book._id}
+                  title={book.title}
+                  author={book.author}
+                  genre={book.genre}
+                  publicationDate={book.publicationDate}
+                  image={book.image}
+                />
+              ))}
         </Grid>
       )}
     </>
