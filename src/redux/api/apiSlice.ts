@@ -19,9 +19,22 @@ export const api = createApi({
         body,
       }),
     }),
+    deleteBook: builder.mutation({
+      query(id) {
+        return {
+          url: `books/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useSingleBookQuery, useAddBookMutation } = api;
+export const {
+  useGetBooksQuery,
+  useSingleBookQuery,
+  useAddBookMutation,
+  useDeleteBookMutation,
+} = api;
 
 // https://book-review-backend-five.vercel.app/api/v1

@@ -1,23 +1,16 @@
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Heading,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Card, Stack, Text } from "@chakra-ui/react";
 
 const SingleCategory = () => {
   return (
     <div>
       <Stack spacing="4">
         <Card variant="outline">
-          <CardHeader>
-            <Heading size="md"> text</Heading>
-          </CardHeader>
-          <CardBody>
-            <Text>variant text</Text>
-          </CardBody>
+          <Box p={6}>
+            <Text fontSize="2xl" mb={4} fontWeight="bold">
+              Fantasy
+            </Text>
+            <Text fontSize="sm">300+ items</Text>
+          </Box>
         </Card>
       </Stack>
     </div>

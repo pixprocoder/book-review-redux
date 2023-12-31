@@ -1,29 +1,52 @@
 import {
   Box,
-  Button,
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
   Heading,
+  Image,
+  Stack,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-const SingleRecentBookCard = () => {
+const SingleRecentBookCard = ({ book }: any) => {
   return (
-    <Box>
-      <Card>
-        <CardHeader>
-          <Heading size="md"> Customer dashboard</Heading>
-        </CardHeader>
+    <Card maxW="sm">
+      <Link to={`/book-detail`}>
         <CardBody>
-          <Text>View a summary of all your customers over the last month.</Text>
+          <Box maxW="300px" m="auto">
+            <Image
+              boxSize="100%"
+              src={book.image}
+              alt="Green double couch with wooden legs"
+              borderRadius="lg"
+            />
+          </Box>
+
+          <Stack mt="6" spacing="3">
+            <Heading size="md">{book.title}</Heading>
+            <Text>
+              Author:{" "}
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {book.author}
+              </span>
+            </Text>
+            <Text>
+              Genre:{" "}
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {book.genre}
+              </span>
+            </Text>
+            <Text>
+              Publication Year:
+              <span style={{ fontWeight: "semibold", color: "blue" }}>
+                {book.publicationDate}
+              </span>
+            </Text>
+          </Stack>
         </CardBody>
-        <CardFooter>
-          <Button>View here</Button>
-        </CardFooter>
-      </Card>
-    </Box>
+      </Link>
+    </Card>
   );
 };
 

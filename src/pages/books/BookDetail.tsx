@@ -11,26 +11,41 @@ import {
   Grid,
   Text,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BookDetailCard from "./BookDetailCard";
 import BookReview from "./BookReview";
 import { useRef } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
-import { useSingleBookQuery } from "../../redux/api/apiSlice";
+import {
+  useDeleteBookMutation,
+  useSingleBookQuery,
+} from "../../redux/api/apiSlice";
 import CustomLoading from "../shared/CustomLoading";
 
 const BookDetail = () => {
   const { id } = useParams();
+  const toast = useToast();
+  const navigate = useNavigate();
 
-  const { data, isLoading } = useSingleBookQuery(id);
+  const { data, isLoading, isSuccess } = useSingleBookQuery(id);
 
   const { user } = useAppSelector((state) => state.auth);
+  const [deleteBook] = useDeleteBookMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
   const handleConfirm = () => {
-    console.log("yes");
-
+    deleteBook(id);
+    if (isSuccess) {
+      toast({
+        title: `Book deleted Successfully`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+      navigate("/book");
+    }
     onClose();
   };
   return (

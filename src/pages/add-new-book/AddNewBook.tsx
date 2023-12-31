@@ -13,6 +13,7 @@ import {
 import { useRef } from "react";
 import { useAddBookMutation } from "../../redux/api/apiSlice";
 import { useAppSelector } from "../../redux/hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 const AddNewBook = () => {
   const toast = useToast();
@@ -21,10 +22,9 @@ const AddNewBook = () => {
   const genreRef = useRef<HTMLInputElement | null>(null);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const publicationRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
-  const [addBook, { isLoading }] = useAddBookMutation();
-  const { addBook: hh } = useAppSelector((state) => state.api.mutations);
-  console.log("inside  data", hh);
+  const [addBook, { isLoading, isSuccess }] = useAddBookMutation();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -51,12 +51,15 @@ const AddNewBook = () => {
     imageRef.current!.value = "";
     publicationRef.current!.value = "";
 
-    toast({
-      title: `Book created Successfully`,
-      position: "top",
-      status: "success",
-      isClosable: true,
-    });
+    if (isSuccess) {
+      toast({
+        title: `Book created Successfully`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+      navigate("/book");
+    }
   };
 
   return (

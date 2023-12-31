@@ -14,8 +14,10 @@ const Categories = () => {
     lg: 4,
   });
   return (
-    <Box my={30}>
-      <Text fontSize="2xl">Categories</Text>
+    <Box my={50}>
+      <Text fontSize="2xl" my={4} fontWeight="bold">
+        Categories
+      </Text>
       <Box>
         <Swiper
           slidesPerView={slidesPerView}

@@ -1,6 +1,6 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 
-const BestBooksCard = () => {
+const BestBooksCard = ({ book }: any) => {
   return (
     <Box
       maxW="sm"
@@ -10,22 +10,16 @@ const BestBooksCard = () => {
       boxShadow="md"
       mb="4"
     >
-      <Image
-        src="https://images.pexels.com/photos/4769488/pexels-photo-4769488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="img"
-        w="100%"
-        h="200px"
-        objectFit="cover"
-      />
+      <Image src={book.image} alt="img" w="100%" h="200px" objectFit="cover" />
       <Box p="4">
         <Text fontSize="sm" color="gray.500">
-          since
+          {book.genre}
         </Text>
         <Text fontSize="lg" fontWeight="semibold" mt="2">
-          This is title
+          {book.title}
         </Text>
         <Text fontSize="md" color="gray.700" mt="2">
-          Kobir
+          {book.author}
         </Text>
       </Box>
     </Box>

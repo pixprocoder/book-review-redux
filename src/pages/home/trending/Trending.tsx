@@ -19,8 +19,7 @@ const TrendingBook = () => {
     <Box my={20}>
       <Box mb={5}>
         <Text
-          bgGradient="linear(to-l, #7928CA, #FF0080)"
-          bgClip="text"
+          color="#0078FF"
           fontSize="3xl"
           fontWeight="extrabold"
           textAlign="center"

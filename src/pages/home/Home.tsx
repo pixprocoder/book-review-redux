@@ -13,7 +13,7 @@ function Home() {
       <TrendingBook />
       <RecentBooks />
       <Categories />
-      <Features />
+      {/* <Features /> */}
       <BestBooks />
       <Reviews />
     </section>

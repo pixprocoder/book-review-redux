@@ -1,7 +1,10 @@
-import { Box, Grid, useBreakpointValue } from "@chakra-ui/react";
+import { Box, Grid, Text, useBreakpointValue } from "@chakra-ui/react";
 import BestBooksCard from "./BestBooksCard";
+import { useGetBooksQuery } from "../../../redux/api/apiSlice";
 
 const BestBooks = () => {
+  const { data } = useGetBooksQuery(undefined);
+  const filteredData = data?.data?.slice(0, 4) || [];
   const templateColumns = useBreakpointValue({
     base: "1fr",
     sm: "repeat(2, 1fr)",
@@ -10,12 +13,13 @@ const BestBooks = () => {
 
   return (
     <Box my={30}>
-      <h1>Best Books</h1>
+      <Text fontSize="2xl" my={4} fontWeight="bold">
+        Best Books
+      </Text>
       <Grid gap={6} templateColumns={templateColumns}>
-        <BestBooksCard />
-        <BestBooksCard />
-        <BestBooksCard />
-        <BestBooksCard />
+        {filteredData.map((book: any) => (
+          <BestBooksCard key={book.title} book={book} />
+        ))}
       </Grid>
     </Box>
   );
