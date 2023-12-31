@@ -12,9 +12,16 @@ export const api = createApi({
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
     }),
+    addBook: builder.mutation({
+      query: (body) => ({
+        url: `/books/create-book`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useSingleBookQuery } = api;
+export const { useGetBooksQuery, useSingleBookQuery, useAddBookMutation } = api;
 
 // https://book-review-backend-five.vercel.app/api/v1
