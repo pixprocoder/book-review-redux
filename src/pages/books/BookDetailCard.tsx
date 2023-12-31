@@ -11,7 +11,7 @@ import {
 function BookDetailCard({ data }: any) {
   return (
     <Card>
-      <CardBody minW="50vw">
+      <CardBody width={["90vw", "50vw"]}>
         <Box maxW="50vw" m="auto">
           <Image boxSize="100%" src={data?.image} borderRadius="lg" />
         </Box>

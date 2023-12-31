@@ -44,7 +44,7 @@ const AddNewBook = () => {
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
       <Card>
-        <CardBody width="50vw">
+        <CardBody width={["90vw", "50vw"]}>
           <Text fontSize="xl" fontWeight="bold" mb={4}>
             Add New Book
           </Text>

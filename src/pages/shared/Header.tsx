@@ -20,7 +20,6 @@ function Header() {
   const { isOpen, onToggle } = useDisclosure();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user.email);
 
   const handleSignOut = () => {
     signOut(auth);
@@ -146,17 +145,36 @@ function Header() {
                   </MenuGroup>
                 </MenuList>
               </Menu> */}
-                <Button
-                  colorScheme="messenger"
-                  variant="outline"
-                  size="sm"
-                  mr={2}
-                >
-                  <Link to="/login">Login</Link>
-                </Button>
-                <Button colorScheme="messenger" size="sm" mr={2}>
-                  <Link to="/register">Register</Link>
-                </Button>
+                {user?.email ? (
+                  <>
+                    <Button colorScheme="messenger" size="sm" ml={2}>
+                      <Link to="/add-new-book">Add New Book</Link>
+                    </Button>
+                    <Button
+                      onClick={handleSignOut}
+                      colorScheme="messenger"
+                      variant="outline"
+                      size="sm"
+                      ml={2}
+                    >
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      colorScheme="messenger"
+                      variant="outline"
+                      size="sm"
+                      mr={2}
+                    >
+                      <Link to="/login">Login</Link>
+                    </Button>
+                    <Button colorScheme="messenger" size="sm" mr={2}>
+                      <Link to="/register">Register</Link>
+                    </Button>
+                  </>
+                )}
               </Flex>
             </Box>
           </Collapse>
