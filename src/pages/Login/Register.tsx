@@ -5,12 +5,11 @@ import {
   FormControl,
   FormLabel,
   Input,
-  useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createUser } from "../../redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch } from "../../redux/hooks/hooks";
 // import end
 
 function Register() {

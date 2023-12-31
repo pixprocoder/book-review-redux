@@ -1,12 +1,17 @@
-import { Box, Grid } from "@chakra-ui/react";
-import React from "react";
+import { Box, Grid, useBreakpointValue } from "@chakra-ui/react";
 import FeaturesCard from "./FeaturesCard";
 
 const Features = () => {
+  const displayItem = useBreakpointValue({
+    base: 2,
+    sm: 2,
+    md: 3,
+    lg: 4,
+  });
   return (
     <Box my={30}>
       <h1>Features</h1>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+      <Grid column={displayItem} gap={6}>
         <FeaturesCard />
         <FeaturesCard />
         <FeaturesCard />

@@ -1,7 +1,6 @@
-import React, { ReactNode } from "react";
-import { useAppSelector } from "../redux/hooks/hooks";
 import { Spinner } from "@chakra-ui/react";
 import { Navigate, useLocation } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks/hooks";
 
 const PrivateRoute = ({ children }: any) => {
   const { user, isLoading } = useAppSelector((state) => state.auth);

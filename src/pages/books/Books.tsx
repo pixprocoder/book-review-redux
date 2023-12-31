@@ -1,6 +1,5 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   Flex,
   Grid,
@@ -9,9 +8,9 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Spinner,
 } from "@chakra-ui/react";
 import { useGetBooksQuery } from "../../redux/api/apiSlice";
+import CustomLoading from "../shared/CustomLoading";
 import SingleBook from "./SingleBook";
 
 function Books() {
@@ -46,20 +45,7 @@ function Books() {
       </Flex>
 
       {isLoading ? (
-        <Box
-          minH="90vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="blue.500"
-            size="xl"
-          />
-        </Box>
+        <CustomLoading />
       ) : (
         <Grid mt={4} templateColumns="repeat(3, 1fr)" gap={6}>
           {data?.data.map((book: any) => (

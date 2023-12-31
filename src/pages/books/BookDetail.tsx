@@ -18,6 +18,7 @@ import BookReview from "./BookReview";
 import { useRef } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
 import { useSingleBookQuery } from "../../redux/api/apiSlice";
+import CustomLoading from "../shared/CustomLoading";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -38,9 +39,13 @@ const BookDetail = () => {
         {data?.data?.title}
       </Text>
       {/* Book detail card */}
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <BookDetailCard data={data?.data} />
-      </Box>
+      {isLoading ? (
+        <CustomLoading />
+      ) : (
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <BookDetailCard data={data?.data} />
+        </Box>
+      )}
 
       {/* Action button */}
       {user?.email && (

@@ -25,7 +25,7 @@ const AddNewBook = () => {
     const author = authorRef.current!.value;
     const genre = genreRef.current!.value;
     const image = imageRef.current!.value;
-    // console.log(title, author, genre, image);
+    console.log(title, author, genre, image);
 
     // Reset form
     titleRef.current!.value = "";

@@ -1,7 +1,24 @@
-import { Box, Grid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  SimpleGrid,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import SingleReviewCard from "./SingleReviewCard";
+// swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
 const Reviews = () => {
+  const slidesPerView = useBreakpointValue({
+    base: 1,
+    sm: 2,
+    md: 3,
+    lg: 4,
+  });
   return (
     <Box my={20}>
       <Box mb={5}>
@@ -19,12 +36,35 @@ const Reviews = () => {
           iure et saepe mollitia vero, adipisci asperiores{" "}
         </Text>
       </Box>
-      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-        <SingleReviewCard />
-        <SingleReviewCard />
-        <SingleReviewCard />
-        <SingleReviewCard />
-      </Grid>
+      <Box>
+        <Swiper
+          slidesPerView={slidesPerView}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          <SimpleGrid columns={slidesPerView} spacing={4} w="100%">
+            <SwiperSlide>
+              <SingleReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SingleReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SingleReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SingleReviewCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <SingleReviewCard />
+            </SwiperSlide>
+          </SimpleGrid>
+        </Swiper>
+      </Box>
     </Box>
   );
 };

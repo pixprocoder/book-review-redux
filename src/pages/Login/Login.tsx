@@ -4,22 +4,13 @@ import {
   Center,
   FormControl,
   FormLabel,
-  HStack,
   Input,
-  Text,
 } from "@chakra-ui/react";
 
 import { useRef } from "react";
-import {
-  useSignInWithGithub,
-  useSignInWithGoogle,
-  useSignInWithTwitter,
-} from "react-firebase-hooks/auth";
-import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
-import auth from "../../firebase/firebase.init";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import { Link, useNavigate } from "react-router-dom";
 
 // import end
 function Login() {

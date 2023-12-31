@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 
 function BookDetailCard({ data }: any) {
-  console.log("data is: ", data);
   return (
     <Card>
       <CardBody minW="50vw">
