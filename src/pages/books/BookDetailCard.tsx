@@ -8,24 +8,35 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-function BookDetailCard() {
+function BookDetailCard({ data }: any) {
+  console.log("data is: ", data);
   return (
-    <Card maxW="sm">
-      <CardBody>
-        <Box maxW="300px" m="auto">
-          <Image
-            boxSize="100%"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.VsAwMyJSxeMs3w9IHcpnuQHaD3%26pid%3DApi&f=1&ipt=1e415e1f050dfea0de29a617cc6111869aedb61ae212554db1a5b61813469152&ipo=images"
-            alt="Green double couch with wooden legs"
-            borderRadius="lg"
-          />
+    <Card>
+      <CardBody minW="50vw">
+        <Box maxW="50vw" m="auto">
+          <Image boxSize="100%" src={data?.image} borderRadius="lg" />
         </Box>
 
         <Stack mt="6" spacing="3">
-          <Heading size="md">Title</Heading>
-          <Text>Author: Kobir</Text>
-          <Text>Genre: Since</Text>
-          <Text>Publication Year: 2000</Text>
+          <Heading size="md">{data?.title}</Heading>
+          <Text>
+            Author:{" "}
+            <span style={{ fontWeight: "semibold", color: "blue" }}>
+              {data?.author}
+            </span>
+          </Text>
+          <Text>
+            Genre:{" "}
+            <span style={{ fontWeight: "semibold", color: "blue" }}>
+              {data?.genre}
+            </span>
+          </Text>
+          <Text>
+            Publication Year:
+            <span style={{ fontWeight: "semibold", color: "blue" }}>
+              {data?.publicationDate}
+            </span>
+          </Text>
         </Stack>
       </CardBody>
     </Card>

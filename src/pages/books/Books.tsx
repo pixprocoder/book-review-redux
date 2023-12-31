@@ -1,25 +1,21 @@
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
-  Input,
   Box,
   Button,
-  Grid,
   Flex,
+  Grid,
+  Input,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
+  MenuList,
   Spinner,
 } from "@chakra-ui/react";
-import SingleBook from "./SingleBook";
-import { useEffect, useState } from "react";
-import { IBooks } from "../../constant";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useGetBooksQuery } from "../../redux/api/apiSlice";
+import SingleBook from "./SingleBook";
 
 function Books() {
   const { data, isLoading } = useGetBooksQuery(undefined);
-  console.log(isLoading);
-
   return (
     <>
       <Flex

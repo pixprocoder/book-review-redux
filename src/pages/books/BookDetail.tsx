@@ -17,12 +17,14 @@ import BookDetailCard from "./BookDetailCard";
 import BookReview from "./BookReview";
 import { useRef } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
+import { useSingleBookQuery } from "../../redux/api/apiSlice";
 
 const BookDetail = () => {
   const { id } = useParams();
 
-  const { user } = useAppSelector((state) => state.auth);
+  const { data, isLoading } = useSingleBookQuery(id);
 
+  const { user } = useAppSelector((state) => state.auth);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
   const handleConfirm = () => {
@@ -32,10 +34,15 @@ const BookDetail = () => {
   };
   return (
     <Box minH="90vh">
-      <h1>Book Detail page for {id}</h1>
+      <Text textAlign="center" my={4} fontSize="xl" color="blue">
+        {data?.data?.title}
+      </Text>
+      {/* Book detail card */}
       <Box display="flex" justifyContent="center" alignItems="center">
-        <BookDetailCard />
+        <BookDetailCard data={data?.data} />
       </Box>
+
+      {/* Action button */}
       {user?.email && (
         <Box display="flex" justifyContent="center" alignItems="center" mt={6}>
           <Button colorScheme="messenger" size="sm" ml={2}>
@@ -56,7 +63,6 @@ const BookDetail = () => {
         isCentered
       >
         <AlertDialogOverlay />
-
         <AlertDialogContent>
           <AlertDialogHeader>
             The Book will be permanently deleted
