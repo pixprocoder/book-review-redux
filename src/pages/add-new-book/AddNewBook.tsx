@@ -11,9 +11,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import { useAddBookMutation } from "../../redux/api/apiSlice";
-import { useAppSelector } from "../../redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { useAddBookMutation } from "../../redux/api/apiSlice";
 
 const AddNewBook = () => {
   const toast = useToast();
@@ -24,7 +23,16 @@ const AddNewBook = () => {
   const publicationRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
-  const [addBook, { isLoading, isSuccess }] = useAddBookMutation();
+  const [addBook, { isSuccess }] = useAddBookMutation();
+  if (isSuccess) {
+    toast({
+      title: `Book created Successfully`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+    navigate("/book");
+  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -50,16 +58,6 @@ const AddNewBook = () => {
     genreRef.current!.value = "";
     imageRef.current!.value = "";
     publicationRef.current!.value = "";
-
-    if (isSuccess) {
-      toast({
-        title: `Book created Successfully`,
-        position: "top",
-        status: "success",
-        isClosable: true,
-      });
-      navigate("/book");
-    }
   };
 
   return (
@@ -71,7 +69,7 @@ const AddNewBook = () => {
           </Text>
           <form onSubmit={handleSubmit}>
             <FormControl mb={4}>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Title*</FormLabel>
               <Input
                 required
                 ref={titleRef}
@@ -81,7 +79,7 @@ const AddNewBook = () => {
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel>Author</FormLabel>
+              <FormLabel>Author*</FormLabel>
               <Input
                 required
                 ref={authorRef}
@@ -91,7 +89,7 @@ const AddNewBook = () => {
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel>Genre</FormLabel>
+              <FormLabel>Genre*</FormLabel>
               <Input
                 required
                 type="text"
@@ -101,7 +99,7 @@ const AddNewBook = () => {
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel>Publication Date</FormLabel>
+              <FormLabel>Publication Date*</FormLabel>
               <Input
                 required
                 type="text"
@@ -111,7 +109,7 @@ const AddNewBook = () => {
             </FormControl>
 
             <FormControl mb={4}>
-              <FormLabel>Image URL</FormLabel>
+              <FormLabel>Image URL*</FormLabel>
               <Input
                 required
                 type="text"
