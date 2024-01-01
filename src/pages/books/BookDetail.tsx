@@ -1,3 +1,4 @@
+import { StarIcon } from "@chakra-ui/icons";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -14,25 +15,26 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import BookDetailCard from "./BookDetailCard";
-import BookReview from "./BookReview";
-import { useEffect, useRef, useState } from "react";
-import { useAppSelector } from "../../redux/hooks/hooks";
 import {
+  useAddReviewMutation,
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../../redux/api/apiSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import CustomLoading from "../shared/CustomLoading";
-import { StarIcon } from "@chakra-ui/icons";
+import BookDetailCard from "./BookDetailCard";
+import BookReview from "./BookReview";
 
 const BookDetail = () => {
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
-  const reviewRef = useRef();
-
+  const reviewRef = useRef<HTMLInputElement | null>(null);
   const [selectedRating, setSelectedRating] = useState(null);
+
+  const [addReview] = useAddReviewMutation();
 
   const handleStarClick = (index: any) => {
     setSelectedRating(index + 1); // Assuming 1-based indexing for ratings
@@ -40,6 +42,7 @@ const BookDetail = () => {
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
 
   const { user } = useAppSelector((state) => state.auth);
+  console.log(user);
   const [deleteBook] = useDeleteBookMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
@@ -59,14 +62,32 @@ const BookDetail = () => {
 
   // handleReview
   const handleReview = () => {
-    const review = reviewRef?.current.value;
-    console.log(review);
+    const review = reviewRef?.current!.value;
     if (selectedRating === null) {
       alert("you must select a rating");
     } else if (review === "") {
       alert("you must Write a Description");
     }
-    console.log(selectedRating);
+
+    toast({
+      title: `Review added Successfully`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
+    const option = [
+      {
+        comment: review,
+        rating: selectedRating,
+        address: "Romania",
+        userName: user?.email,
+        userPhotoURL: "random",
+      },
+    ];
+
+    addReview({ id, data: option });
+
+    reviewRef.current!.value = "";
   };
 
   let stars = [1, 2, 3, 4, 5];
@@ -159,7 +180,7 @@ const BookDetail = () => {
           This book has - review
         </Text>
         <Grid>
-          <BookReview />
+          <BookReview id={id} />
         </Grid>
       </Box>
     </Box>

@@ -11,7 +11,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 
-const BookReviewCard = () => {
+const BookReviewCard = ({ review }: any) => {
   return (
     <>
       <Card>
@@ -22,17 +22,12 @@ const BookReviewCard = () => {
             </WrapItem>
           </Wrap>
           <Box display="flex" flexDirection="column">
-            <Text as="b">Kobir</Text>
-            <Text fontSize="xs">Bangladesh</Text>
+            <Text as="b">{review?.userName}</Text>
+            <Text fontSize="xs">{review?.address}</Text>
           </Box>
         </CardHeader>
         <CardBody py={0}>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque sunt
-            esse rem nihil molestias eum perspiciatis, at iste accusantium
-            laborum, quod veniam aliquid incidunt ullam qui repellat nemo
-            pariatur magni?
-          </Text>
+          <Text>{review?.comment}</Text>
         </CardBody>
         <CardFooter display="flex" gap={2}>
           <StarIcon />

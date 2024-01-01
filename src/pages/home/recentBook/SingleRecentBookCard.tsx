@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const SingleRecentBookCard = ({ book }: any) => {
   return (
     <Card maxW="sm">
-      <Link to={`/book-detail`}>
+      <Link to={`/book-detail/${book._id}`}>
         <CardBody>
           <Box maxW="300px" m="auto">
             <Image
