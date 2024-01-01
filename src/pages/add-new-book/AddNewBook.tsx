@@ -10,7 +10,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddBookMutation } from "../../redux/api/apiSlice";
 
@@ -23,17 +23,18 @@ const AddNewBook = () => {
   const publicationRef = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
-  const [addBook, { isSuccess }] = useAddBookMutation();
-  if (isSuccess) {
-    toast({
-      title: `Book created Successfully`,
-      position: "top",
-      status: "success",
-      isClosable: true,
-    });
-    navigate("/book");
-  }
-
+  const [addBook, { isSuccess, isError }] = useAddBookMutation();
+  useEffect(() => {
+    if (isSuccess && !isError) {
+      toast({
+        title: `Book created Successfully`,
+        position: "top",
+        status: "success",
+        isClosable: true,
+      });
+      navigate("/book");
+    }
+  }, [isSuccess, isError, toast, navigate]);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const title = titleRef.current!.value;

@@ -10,25 +10,33 @@ import {
   Button,
   Grid,
   Text,
+  Textarea,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import BookDetailCard from "./BookDetailCard";
 import BookReview from "./BookReview";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../redux/hooks/hooks";
 import {
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../../redux/api/apiSlice";
 import CustomLoading from "../shared/CustomLoading";
+import { StarIcon } from "@chakra-ui/icons";
 
 const BookDetail = () => {
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
+  const reviewRef = useRef();
 
+  const [selectedRating, setSelectedRating] = useState(null);
+
+  const handleStarClick = (index: any) => {
+    setSelectedRating(index + 1); // Assuming 1-based indexing for ratings
+  };
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
 
   const { user } = useAppSelector((state) => state.auth);
@@ -48,6 +56,21 @@ const BookDetail = () => {
     }
     onClose();
   };
+
+  // handleReview
+  const handleReview = () => {
+    const review = reviewRef?.current.value;
+    console.log(review);
+    if (selectedRating === null) {
+      alert("you must select a rating");
+    } else if (review === "") {
+      alert("you must Write a Description");
+    }
+    console.log(selectedRating);
+  };
+
+  let stars = [1, 2, 3, 4, 5];
+
   return (
     <Box minH="90vh">
       <Text textAlign="center" my={4} fontSize="xl" color="blue">
@@ -101,6 +124,34 @@ const BookDetail = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Review Form */}
+      <Box>
+        <Box>
+          <Text mb="8px">
+            Write Review to{" "}
+            <span style={{ color: "blue" }}>{data?.data?.title}</span>
+          </Text>
+
+          <Box display="flex" gap={1} mb={2} fontSize="xs" cursor="pointer">
+            {stars.map((start, index) => (
+              <StarIcon
+                color={index < selectedRating! ? "#FFB802" : "#848484"}
+                key={index}
+                onClick={() => handleStarClick(index)}
+              />
+            ))}
+          </Box>
+        </Box>
+        <Textarea
+          ref={reviewRef}
+          placeholder="Here is a sample placeholder"
+          size="sm"
+        />
+        <Button onClick={handleReview} colorScheme="messenger" size="sm" mt={2}>
+          Post
+        </Button>
+      </Box>
 
       {/*  Reviews */}
       <Box my={20}>
