@@ -3,7 +3,7 @@ import BookReviewCard from "./BookReviewCard";
 import { useSingleBookQuery } from "../../redux/api/apiSlice";
 
 const BookReview = ({ id }: { id: String | undefined }) => {
-  const { data, isLoading } = useSingleBookQuery(id);
+  const { data } = useSingleBookQuery(id);
 
   const templateColumns = useBreakpointValue({
     base: "repeat(1, 1fr)",

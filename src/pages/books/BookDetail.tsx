@@ -22,7 +22,7 @@ import {
   useDeleteBookMutation,
   useSingleBookQuery,
 } from "../../redux/api/apiSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { useAppSelector } from "../../redux/hooks/hooks";
 import CustomLoading from "../shared/CustomLoading";
 import BookDetailCard from "./BookDetailCard";
 import BookReview from "./BookReview";
@@ -31,7 +31,7 @@ const BookDetail = () => {
   const { id } = useParams();
   const toast = useToast();
   const navigate = useNavigate();
-  const reviewRef = useRef<HTMLInputElement | null>(null);
+  const reviewRef = useRef<any>(null);
   const [selectedRating, setSelectedRating] = useState(null);
 
   const [addReview] = useAddReviewMutation();
@@ -40,9 +40,8 @@ const BookDetail = () => {
     setSelectedRating(index + 1); // Assuming 1-based indexing for ratings
   };
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
-
   const { user } = useAppSelector((state) => state.auth);
-  console.log(user);
+
   const [deleteBook] = useDeleteBookMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
@@ -158,7 +157,7 @@ const BookDetail = () => {
             {stars.map((start, index) => (
               <StarIcon
                 color={index < selectedRating! ? "#FFB802" : "#848484"}
-                key={index}
+                key={start}
                 onClick={() => handleStarClick(index)}
               />
             ))}
