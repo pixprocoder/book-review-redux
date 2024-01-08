@@ -6,7 +6,6 @@ const RecentBooks = () => {
   const { data } = useGetBooksQuery(undefined);
 
   const recentData = data?.data?.slice(0, 10) || [];
-  console.log(recentData);
 
   const templateColumns = useBreakpointValue({
     base: "1fr",

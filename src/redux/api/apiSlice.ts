@@ -9,7 +9,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => `/books`,
-      providesTags: ["create-book"],
+      providesTags: ["create-book", "delete-book"],
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,

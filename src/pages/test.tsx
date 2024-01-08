@@ -31,7 +31,6 @@ function TransitionExample() {
   };
 
   const handleCancel = () => {
-    console.log("No"); // Log "No" when cancel is clicked
     onClose();
     toast({
       title: "I am happy",
