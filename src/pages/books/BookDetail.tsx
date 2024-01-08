@@ -40,6 +40,7 @@ const BookDetail = () => {
     setSelectedRating(index + 1); // Assuming 1-based indexing for ratings
   };
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
+  // console.log(data?.data?.reviews);
 
   const { user } = useAppSelector((state) => state.auth);
 

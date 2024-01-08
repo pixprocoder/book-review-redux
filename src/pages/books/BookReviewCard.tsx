@@ -12,6 +12,13 @@ import {
 } from "@chakra-ui/react";
 
 const BookReviewCard = ({ review }: any) => {
+  console.log(review.rating);
+
+  let stars = [];
+  for (let i = 1; i <= review.rating; i++) {
+    stars.push(i);
+  }
+
   return (
     <>
       <Card>
@@ -30,11 +37,9 @@ const BookReviewCard = ({ review }: any) => {
           <Text>{review?.comment}</Text>
         </CardBody>
         <CardFooter display="flex" gap={2}>
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
+          {stars.map((start, index) => (
+            <StarIcon color="#FFB802" key={start} />
+          ))}
         </CardFooter>
       </Card>
     </>
