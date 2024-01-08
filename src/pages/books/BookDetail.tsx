@@ -76,7 +76,7 @@ const BookDetail = () => {
         comment: review,
         rating: selectedRating,
         address: "Romania",
-        userName: user?.email,
+        userName: user?.email || "gust",
         userPhotoURL: "random",
       },
     ];

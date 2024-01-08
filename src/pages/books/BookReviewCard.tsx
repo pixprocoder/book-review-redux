@@ -12,8 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 const BookReviewCard = ({ review }: any) => {
-  console.log(review.rating);
-
   let stars = [];
   for (let i = 1; i <= review.rating; i++) {
     stars.push(i);
