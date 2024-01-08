@@ -40,11 +40,13 @@ const BookDetail = () => {
     setSelectedRating(index + 1); // Assuming 1-based indexing for ratings
   };
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
+
   const { user } = useAppSelector((state) => state.auth);
 
   const [deleteBook] = useDeleteBookMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<null>(null);
+
   const handleConfirm = () => {
     deleteBook(id);
     if (isSuccess) {
@@ -68,12 +70,6 @@ const BookDetail = () => {
       alert("you must Write a Description");
     }
 
-    toast({
-      title: `Review added Successfully`,
-      position: "top",
-      status: "success",
-      isClosable: true,
-    });
     const option = [
       {
         comment: review,
