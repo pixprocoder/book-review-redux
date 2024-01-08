@@ -35,9 +35,14 @@ const BookReviewCard = ({ review }: any) => {
           <Text>{review?.comment}</Text>
         </CardBody>
         <CardFooter display="flex" gap={2}>
-          {stars.map((start, index) => (
-            <StarIcon color="#FFB802" key={start} />
-          ))}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <small style={{ fontSize: "small" }}>{stars.length} out of 5</small>
+            <Box>
+              {stars.map((start, index) => (
+                <StarIcon fontSize={15} color="#FFB802" key={start} />
+              ))}
+            </Box>
+          </div>
         </CardFooter>
       </Card>
     </>
