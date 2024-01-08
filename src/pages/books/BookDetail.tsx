@@ -173,7 +173,9 @@ const BookDetail = () => {
       {/*  Reviews */}
       <Box my={20}>
         <Text fontSize="xl" mb={4}>
-          This book has - review
+          This book has -{" "}
+          <span style={{ color: "#FFB802" }}>{data?.data?.reviews.length}</span>{" "}
+          {data?.data?.reviews.length < 2 ? "review" : "Reviews"}
         </Text>
         <Grid>
           <BookReview id={id} />
