@@ -7,7 +7,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 // import end
@@ -16,6 +16,8 @@ function Register() {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -27,6 +29,7 @@ function Register() {
     console.log(name);
 
     dispatch(createUser({ email, password }));
+    navigate("/");
 
     // reset form
     nameRef.current!.value = "";
