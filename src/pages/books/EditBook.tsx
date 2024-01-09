@@ -1,11 +1,18 @@
 import { Box, Button } from "@chakra-ui/react";
 import { useSingleBookQuery } from "../../redux/api/apiSlice";
+import { useParams } from "react-router-dom";
 
 const EditBook = () => {
-  // const { data, isLoading, isSuccess } = useSingleBookQuery(2);
+  const { id } = useParams();
+  console.log(id);
+  const { data, isLoading, isSuccess } = useSingleBookQuery(id);
+  console.log(data);
   return (
     <Box>
-      <h1 style={{ textAlign: "center" }}>This is edit Book page</h1>
+      <h1 style={{ textAlign: "center" }}>
+        you're editing on{" "}
+        <span style={{ color: "blue" }}>{data?.data?.title}</span>
+      </h1>
 
       <h1>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae

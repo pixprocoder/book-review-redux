@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <BookDetail />,
       },
       {
-        path: "/edit-book",
+        path: "/edit-book/:id",
         element: <EditBook />,
       },
     ],

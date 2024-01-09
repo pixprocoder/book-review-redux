@@ -106,7 +106,7 @@ const BookDetail = () => {
       {user?.email && (
         <Box display="flex" justifyContent="center" alignItems="center" mt={6}>
           <Button colorScheme="messenger" size="sm" ml={2}>
-            <Link to="/edit-book">Edit</Link>
+            <Link to={`/edit-book/${id}`}>Edit</Link>
           </Button>
           <Button onClick={onOpen} colorScheme="red" size="sm" ml={2}>
             Delete
