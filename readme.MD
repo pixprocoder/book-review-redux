@@ -1,6 +1,6 @@
-## This is A full stack project using React Redux
+## This is A full stack project using React and node express.
 
-## Packages and technologies
+## Packages and technologies I am using
 
 - react
 - react Router dom
@@ -12,7 +12,7 @@
 - react-icons
 - firebase
 
-### Working Process
+### Working Process I am doing 
 
 1. Project setup
 2. Basic Packages install
@@ -20,4 +20,4 @@
 4. Redux setup completed
 5. Header created
 6. Login page created
-7. authentication
+7. Authentication 
