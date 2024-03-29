@@ -67,8 +67,10 @@ const BookDetail = () => {
     const review = reviewRef?.current!.value;
     if (selectedRating === null) {
       alert("you must select a rating");
+      return
     } else if (review === "") {
       alert("you must Write a Description");
+      return
     }
 
     const option = [

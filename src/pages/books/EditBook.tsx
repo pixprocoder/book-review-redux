@@ -6,7 +6,7 @@ const EditBook = () => {
   const { id } = useParams();
   console.log(id);
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
-  console.log(data);
+  console.log('inside data',data);
   return (
     <Box>
       <h1 style={{ textAlign: "center" }}>
