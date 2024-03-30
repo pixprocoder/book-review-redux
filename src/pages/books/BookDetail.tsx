@@ -43,6 +43,7 @@ const BookDetail = () => {
   // console.log(data?.data?.reviews);
 
   const { user } = useAppSelector((state) => state.auth);
+  console.log(user?.email);
 
   const [deleteBook] = useDeleteBookMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();

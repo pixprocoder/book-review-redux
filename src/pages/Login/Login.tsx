@@ -4,6 +4,7 @@ import {
   Center,
   FormControl,
   FormLabel,
+  HStack,
   Input,
 } from "@chakra-ui/react";
 
@@ -25,6 +26,7 @@ function Login() {
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
     dispatch(loginUser({ email, password }));
+  
     if (user?.email && !isLoading) {
       navigate("/");
     }

@@ -4,6 +4,7 @@ import { useAppSelector } from "../redux/hooks/hooks";
 
 const PrivateRoute = ({ children }: any) => {
   const { user, isLoading } = useAppSelector((state) => state.auth);
+  console.log(user?.email)
 
   const { pathname } = useLocation();
 
