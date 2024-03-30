@@ -38,7 +38,7 @@ const BookReviewCard = ({ review }: any) => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <small style={{ fontSize: "small" }}>{stars.length} out of 5</small>
             <Box>
-              {stars.map((start, index) => (
+              {stars.map((start) => (
                 <StarIcon fontSize={15} color="#FFB802" key={start} />
               ))}
             </Box>

@@ -1,5 +1,14 @@
 ## This is A full stack project using React and node express.
 
+## Features
+
+### User Facing Features
+- User can login or register
+- User can see the books
+- User can leave review
+- Authenticated user (if they are owner) can edit or delete books
+
+
 ## Packages and technologies I am using
 
 - react
