@@ -14,6 +14,8 @@ type IAuthInfo = {
   error: string | null;
 };
 
+
+
 const initialState: IAuthInfo = {
   user: {
     email: null,
