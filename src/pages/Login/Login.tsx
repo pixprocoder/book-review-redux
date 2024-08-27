@@ -1,32 +1,29 @@
-import {Box, Button, Center, FormControl, FormLabel, Input, HStack } from "@chakra-ui/react";
+import {Box, Button, Center, FormControl, FormLabel, HStack, Input, Text} from "@chakra-ui/react";
 
-import React, {useRef} from "react";
+
 import {Link, useNavigate} from "react-router-dom";
 import {loginUser} from "../../redux/features/auth/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {useForm} from "react-hook-form";
 
 // import end
 function Login() {
   const navigate = useNavigate();
   const { user, isLoading } = useAppSelector((state) => state.auth);
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
+
   const dispatch = useAppDispatch();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const email = emailRef.current!.value;
-    const password = passwordRef.current!.value;
+  // handling Form
+  const { register, handleSubmit, formState: { errors } , reset} = useForm();
+  const onSubmit = (data : any) => {
+    const {email,  password} = data;
     dispatch(loginUser({ email, password }));
-  
+    reset()
     if (user?.email && !isLoading) {
       navigate("/");
     }
-
-    // reset form
-    emailRef.current!.value = "";
-    passwordRef.current!.value = "";
   };
+
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
       <Box w={{ base: "100%", md: "50%" }} bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
@@ -34,14 +31,33 @@ function Login() {
           Please Login
         </Center>
         <Box>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Your Email *</FormLabel>
-              <Input name="email" ref={emailRef} type="email" />
+              <Input
+                  {...register("email", {required: true})}
+                  aria-invalid={errors.email ? "true" : "false"}
+                  name="email"  type="email" />
+              {errors.email?.type === 'required' && (
+                  <Text fontSize="xs" role="alert" color="red.500">
+                    Email is required
+                  </Text>
+              )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
-              <Input name="password" ref={passwordRef} type="password" />
+              <Input
+                  {...register("password", {required: true})}
+                  aria-invalid={errors.password ? "true" : "false"}
+                  name="password" type="password" />
+              {errors.password?.type === 'required' && (
+                  <Text
+                      fontSize="xs"
+                      role="alert" color="red.500">
+                    Password is required
+                  </Text>
+              )}
+
             </FormControl>
             <Box my={2} fontSize="xs">
               New to here?{" "}
