@@ -6,7 +6,7 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hooks/hooks";
@@ -26,7 +26,7 @@ function Register() {
     const name = nameRef.current!.value;
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
-    console.log(name);
+
 
     dispatch(createUser({ email, password }));
     navigate("/");
@@ -38,7 +38,7 @@ function Register() {
   };
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
-      <Box w="50%" bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
+      <Box w={{ base: "100%", md: "50%" }} bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
         <Center fontSize={33} textColor="blue.400" fontWeight="bold">
           Please Register
         </Center>

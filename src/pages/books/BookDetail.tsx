@@ -71,6 +71,7 @@ const BookDetail = () => {
         title: `You Must select a Rating`,
         position: "top",
         status: "error",
+        duration: 3000,
         isClosable: true,
       });
       return
@@ -79,6 +80,7 @@ const BookDetail = () => {
         title: `You Must write something`,
         position: "top",
         status: "error",
+        duration: 3000,
         isClosable: true,
       });
       return
