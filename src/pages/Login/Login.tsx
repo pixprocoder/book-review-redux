@@ -58,17 +58,17 @@ function Login() {
               <Button
               // onClick={() => signInWithGoogle()}
                 colorScheme="twitter"
-                leftIcon={<FaGoogle />}
+              //  leftIcon={<FaGoogle />}
               ></Button>
               <Button
                //onClick={() => signInWithTwitter()}
                 colorScheme="twitter"
-                leftIcon={<FaTwitter />}
+              //  leftIcon={<FaTwitter />}
               ></Button>
               <Button
                // onClick={() => signInWithGithub()}
                 colorScheme="twitter"
-                leftIcon={<FaGithub />}
+             //   leftIcon={<FaGithub />}
               ></Button>
             </HStack>
           </Box> 
