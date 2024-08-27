@@ -1,4 +1,4 @@
-import {Box, Button, Center, FormControl, FormLabel, Input,} from "@chakra-ui/react";
+import {Box, Button, Center, FormControl, FormLabel, Input, HStack } from "@chakra-ui/react";
 
 import React, {useRef} from "react";
 import {Link, useNavigate} from "react-router-dom";
@@ -53,25 +53,25 @@ function Login() {
               Login
             </Button>
           </form>
-          {/* <Box>
+          <Box>
             <HStack display="flex" justifyContent="center">
               <Button
-                onClick={() => signInWithGoogle()}
+              // onClick={() => signInWithGoogle()}
                 colorScheme="twitter"
                 leftIcon={<FaGoogle />}
               ></Button>
               <Button
-                onClick={() => signInWithTwitter()}
+               //onClick={() => signInWithTwitter()}
                 colorScheme="twitter"
                 leftIcon={<FaTwitter />}
               ></Button>
               <Button
-                onClick={() => signInWithGithub()}
+               // onClick={() => signInWithGithub()}
                 colorScheme="twitter"
                 leftIcon={<FaGithub />}
               ></Button>
             </HStack>
-          </Box> */}
+          </Box> 
         </Box>
       </Box>
     </Box>
