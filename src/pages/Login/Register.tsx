@@ -23,7 +23,7 @@ function Register() {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    const name = nameRef.current!.value;
+    // const name = nameRef.current!.value;
     const email = emailRef.current!.value;
     const password = passwordRef.current!.value;
 

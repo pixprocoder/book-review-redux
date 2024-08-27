@@ -1,9 +1,10 @@
-import {Box, Button, Center, FormControl, FormLabel, Input,} from "@chakra-ui/react";
+import {Box, Button, Center, FormControl, FormLabel, HStack, Input,} from "@chakra-ui/react";
 
 import React, {useRef} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {loginUser} from "../../redux/features/auth/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {FaGithub, FaGoogle, FaTwitter} from "react-icons/fa";
 
 // import end
 function Login() {
@@ -33,7 +34,7 @@ function Login() {
         <Center fontSize={33} textColor="blue.400" fontWeight="bold">
           Please Login
         </Center>
-        <Box>
+        <Box >
           <form onSubmit={handleLogin}>
             <FormControl>
               <FormLabel>Your Email *</FormLabel>
@@ -53,25 +54,25 @@ function Login() {
               Login
             </Button>
           </form>
-          {/* <Box>
+          <Box mt="4">
             <HStack display="flex" justifyContent="center">
               <Button
-                onClick={() => signInWithGoogle()}
+                // onClick={() => useSignInWithGoogle(auth)}
                 colorScheme="twitter"
                 leftIcon={<FaGoogle />}
               ></Button>
               <Button
-                onClick={() => signInWithTwitter()}
+                // onClick={() => signInWithTwitter()}
                 colorScheme="twitter"
                 leftIcon={<FaTwitter />}
               ></Button>
               <Button
-                onClick={() => signInWithGithub()}
+                // onClick={() => signInWithGithub()}
                 colorScheme="twitter"
                 leftIcon={<FaGithub />}
               ></Button>
             </HStack>
-          </Box> */}
+          </Box>
         </Box>
       </Box>
     </Box>
