@@ -5,11 +5,12 @@ import {Link, useNavigate} from "react-router-dom";
 import {loginUser} from "../../redux/features/auth/authSlice";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {useForm} from "react-hook-form";
+import {FaGithub, FaGoogle, FaTwitter} from "react-icons/fa";
 
 // import end
 function Login() {
-  const navigate = useNavigate();
-  const { user, isLoading } = useAppSelector((state) => state.auth);
+  // const navigate = useNavigate();
+  // const { user, isLoading ,} = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
@@ -19,9 +20,10 @@ function Login() {
     const {email,  password} = data;
     dispatch(loginUser({ email, password }));
     reset()
-    if (user?.email && !isLoading) {
-      navigate("/");
-    }
+    // if(user){
+    // navigate("/");
+    // }
+
   };
 
   return (
@@ -70,21 +72,21 @@ function Login() {
             </Button>
           </form>
           <Box>
-            <HStack display="flex" justifyContent="center">
+            <HStack mt="4" display="flex" justifyContent="center">
               <Button
               // onClick={() => signInWithGoogle()}
                 colorScheme="twitter"
-              //  leftIcon={<FaGoogle />}
+               leftIcon={<FaGoogle />}
               ></Button>
               <Button
                //onClick={() => signInWithTwitter()}
                 colorScheme="twitter"
-              //  leftIcon={<FaTwitter />}
+               leftIcon={<FaTwitter />}
               ></Button>
               <Button
                // onClick={() => signInWithGithub()}
                 colorScheme="twitter"
-             //   leftIcon={<FaGithub />}
+               leftIcon={<FaGithub />}
               ></Button>
             </HStack>
           </Box> 

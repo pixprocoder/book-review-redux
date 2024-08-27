@@ -18,7 +18,6 @@ function Register() {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch();
 
   const handleRegister = (e: React.FormEvent) => {
