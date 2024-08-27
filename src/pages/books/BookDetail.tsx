@@ -67,10 +67,20 @@ const BookDetail = () => {
   const handleReview = () => {
     const review = reviewRef?.current!.value;
     if (selectedRating === null) {
-      alert("you must select a rating");
+      toast({
+        title: `You Must select a Rating`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
       return
     } else if (review === "") {
-      alert("you must Write a Description");
+      toast({
+        title: `You Must write something`,
+        position: "top",
+        status: "error",
+        isClosable: true,
+      });
       return
     }
 
@@ -85,6 +95,13 @@ const BookDetail = () => {
     ];
 
     addReview({ id, data: option });
+    // after submit showing toast
+    toast({
+      title: `Review Added successfully 🚀`,
+      position: "top",
+      status: "success",
+      isClosable: true,
+    });
 
     reviewRef.current!.value = "";
   };

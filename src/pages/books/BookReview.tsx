@@ -4,6 +4,7 @@ import { useSingleBookQuery } from "../../redux/api/apiSlice";
 
 const BookReview = ({ id }: { id: String | undefined }) => {
   const { data } = useSingleBookQuery(id);
+  console.log("book details",data);
 
   const templateColumns = useBreakpointValue({
     base: "repeat(1, 1fr)",
