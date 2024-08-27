@@ -1,40 +1,23 @@
-import {
-  Box,
-  Button,
-  Center,
-  FormControl,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
-import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "../../redux/features/auth/authSlice";
-import { useAppDispatch } from "../../redux/hooks/hooks";
+import {Box, Button, Center, FormControl, FormLabel, Input, Text,} from "@chakra-ui/react";
+import {Link} from "react-router-dom";
+import {createUser} from "../../redux/features/auth/authSlice";
+import {useAppDispatch} from "../../redux/hooks/hooks";
+import {useForm} from "react-hook-form";
+
 // import end
 
 function Register() {
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    // const name = nameRef.current!.value;
-    const email = emailRef.current!.value;
-    const password = passwordRef.current!.value;
+  // handling form register
+  const {register, handleSubmit, reset, formState:{errors}} = useForm()
+  const onSubmit = (values:any) => {
+    const {email, password } = values;
+    dispatch(createUser({email, password}))
+    reset()
+  }
 
 
-    dispatch(createUser({ email, password }));
-    navigate("/");
-
-    // reset form
-    nameRef.current!.value = "";
-    emailRef.current!.value = "";
-    passwordRef.current!.value = "";
-  };
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
       <Box w={{ base: "100%", md: "50%" }} bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
@@ -42,23 +25,53 @@ function Register() {
           Please Register
         </Center>
         <Box>
-          <form onSubmit={handleRegister}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl>
               <FormLabel>Your Name *</FormLabel>
-              <Input name="name" ref={nameRef} type="text" />
+              <Input
+                  {...register("name", {required: true})}
+                  aria-invalid={errors.name ? "true" : "false"}
+                  name="name" type="text" />
+              {errors.name?.type === 'required' && (
+                  <Text
+                      fontSize="xs"
+                      role="alert" color="red.500">
+                    Name is required
+                  </Text>
+              )}
+
             </FormControl>
             <FormControl>
               <FormLabel mt={4}>Your Email *</FormLabel>
-              <Input name="email" ref={emailRef} type="email" />
+              <Input
+                  {...register("email", {required: true})}
+                  aria-invalid={errors.email ? "true" : "false"}
+                  name="email" type="email" />
+
+              {errors.email?.type === 'required' && (
+                  <Text
+                      fontSize="xs"
+                      role="alert" color="red.500">
+                    Email is required
+                  </Text>
+              )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
               <Input
+                  {...register("password", {required: true})}
+                  aria-invalid={errors.password ? "true" : "false"}
                 id="password"
-                ref={passwordRef}
                 name="password"
                 type="password"
               />
+              {errors.password?.type === 'required' && (
+                  <Text
+                      fontSize="xs"
+                      role="alert" color="red.500">
+                    Password is required
+                  </Text>
+              )}
             </FormControl>
             <Box my={2} fontSize="xs">
               Already Have an Account?{" "}

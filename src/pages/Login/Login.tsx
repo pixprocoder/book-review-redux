@@ -1,15 +1,15 @@
 import {Box, Button, Center, FormControl, FormLabel, HStack, Input, Text} from "@chakra-ui/react";
 
 
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {loginUser} from "../../redux/features/auth/authSlice";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
+import {useAppDispatch} from "../../redux/hooks/hooks";
 import {useForm} from "react-hook-form";
 import {FaGithub, FaGoogle, FaTwitter} from "react-icons/fa";
-
 // import end
+
 function Login() {
-  // const navigate = useNavigate();
+  // const navigate = useNavigate();ß
   // const { user, isLoading ,} = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
@@ -20,6 +20,8 @@ function Login() {
     const {email,  password} = data;
     dispatch(loginUser({ email, password }));
     reset()
+
+    //!TODO: Navigate the user to home page after successfully login
     // if(user){
     // navigate("/");
     // }
