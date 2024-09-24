@@ -9,6 +9,7 @@ import Books from "../pages/books/Books";
 import AddNewBook from "../pages/add-new-book/AddNewBook";
 import BookDetail from "../pages/books/BookDetail";
 import EditBook from "../pages/books/EditBook";
+import BlogDetails from "../pages/blog/BlogDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <Blog />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/about",
