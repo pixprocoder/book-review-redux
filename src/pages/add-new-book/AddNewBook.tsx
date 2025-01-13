@@ -35,6 +35,7 @@ const AddNewBook = () => {
       navigate("/book");
     }
   }, [isSuccess, isError, toast, navigate]);
+  // TODO: implement react hooks form
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const title = titleRef.current!.value;

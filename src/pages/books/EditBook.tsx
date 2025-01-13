@@ -1,28 +1,74 @@
-import { Box, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 import { useSingleBookQuery } from "../../redux/api/apiSlice";
 import { useParams } from "react-router-dom";
-
+import { useForm } from "react-hook-form";
 const EditBook = () => {
   const { id } = useParams();
-  console.log(id);
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
-  console.log("inside data", data?.data);
-  console.log(isLoading);
-  console.log(isSuccess);
+
+  // react hooks form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const onSubmit = (data: any) => {
+    console.log(data);
+    reset();
+  };
+
+  const { title, author, image, publicationDate, genre } = data?.data;
   return (
     <Box style={{ minHeight: "85vh" }}>
       <h1 style={{ textAlign: "center" }}>
-        you're editing on{" "}
-        <span style={{ color: "blue" }}>{data?.data?.title}</span>
+        Edit on <span style={{ color: "blue" }}>{data?.data?.title}</span>
       </h1>
-
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-        aliquam voluptates tenetur veritatis, molestiae delectus rem non quis id
-        minus quidem tempora? Repudiandae unde quisquam ducimus officiis error
-        natus. Tempora?
-      </h1>
-      <Button>Update</Button>
+      <form
+        style={{ width: "50%", margin: "auto" }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <FormControl>
+          <FormLabel>Book Title </FormLabel>
+          <Input
+            {...register("title", { required: true })}
+            aria-invalid={errors?.title ? "true" : "false"}
+            placeholder={title}
+            name="title"
+            type="text"
+          />
+        </FormControl>
+        <FormControl mt={4}>
+          <FormLabel>Genre</FormLabel>
+          <Input
+            {...register("genre", { required: true })}
+            aria-invalid={errors?.genre ? "true" : "false"}
+            placeholder={genre}
+            name="genre"
+            type="text"
+          />
+        </FormControl>
+        <FormControl mt={4}>
+          <FormLabel>Publication Year</FormLabel>
+          <Input
+            {...register("publicationYear", { required: true })}
+            aria-invalid={errors?.publicationYear ? "true" : "false"}
+            placeholder={publicationDate}
+            name="publicationYear"
+            type="text"
+          />
+        </FormControl>
+        <Button colorScheme="messenger" w="100%" mt="4" type="submit">
+          update
+        </Button>
+      </form>
     </Box>
   );
 };
