@@ -1,36 +1,58 @@
-import {Box, Button, Center, FormControl, FormLabel, HStack, Input, Text} from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  FormControl,
+  FormLabel,
+  HStack,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 
-
-import {Link} from "react-router-dom";
-import {loginUser} from "../../redux/features/auth/authSlice";
-import {useAppDispatch} from "../../redux/hooks/hooks";
-import {useForm} from "react-hook-form";
-import {FaGithub, FaGoogle, FaTwitter} from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useForm } from "react-hook-form";
+import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
+import { useAppSelector } from "../../redux/hooks/hooks.ts";
+import { useEffect } from "react";
 // import end
 
 function Login() {
-  // const navigate = useNavigate();ß
-  // const { user, isLoading ,} = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const { user, isLoading } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
 
   // handling Form
-  const { register, handleSubmit, formState: { errors } , reset} = useForm();
-  const onSubmit = (data : any) => {
-    const {email,  password} = data;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const onSubmit = (data: any) => {
+    const { email, password } = data;
     dispatch(loginUser({ email, password }));
-    reset()
-
-    //!TODO: Navigate the user to home page after successfully login
-    // if(user){
-    // navigate("/");
-    // }
-
+    reset();
   };
+  // navigating the user to home page after loing successfully
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
-      <Box w={{ base: "100%", md: "50%" }} bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
+      <Box
+        w={{ base: "100%", md: "50%" }}
+        bg="gray.50"
+        p="10"
+        mt="12"
+        rounded="lg"
+        mx="auto"
+      >
         <Center fontSize={33} textColor="blue.400" fontWeight="bold">
           Please Login
         </Center>
@@ -39,29 +61,30 @@ function Login() {
             <FormControl>
               <FormLabel>Your Email *</FormLabel>
               <Input
-                  {...register("email", {required: true})}
-                  aria-invalid={errors.email ? "true" : "false"}
-                  name="email"  type="email" />
-              {errors.email?.type === 'required' && (
-                  <Text fontSize="xs" role="alert" color="red.500">
-                    Email is required
-                  </Text>
+                {...register("email", { required: true })}
+                aria-invalid={errors.email ? "true" : "false"}
+                name="email"
+                type="email"
+              />
+              {errors.email?.type === "required" && (
+                <Text fontSize="xs" role="alert" color="red.500">
+                  Email is required
+                </Text>
               )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
               <Input
-                  {...register("password", {required: true})}
-                  aria-invalid={errors.password ? "true" : "false"}
-                  name="password" type="password" />
-              {errors.password?.type === 'required' && (
-                  <Text
-                      fontSize="xs"
-                      role="alert" color="red.500">
-                    Password is required
-                  </Text>
+                {...register("password", { required: true })}
+                aria-invalid={errors.password ? "true" : "false"}
+                name="password"
+                type="password"
+              />
+              {errors.password?.type === "required" && (
+                <Text fontSize="xs" role="alert" color="red.500">
+                  Password is required
+                </Text>
               )}
-
             </FormControl>
             <Box my={2} fontSize="xs">
               New to here?{" "}
@@ -76,22 +99,22 @@ function Login() {
           <Box>
             <HStack mt="4" display="flex" justifyContent="center">
               <Button
-              // onClick={() => signInWithGoogle()}
+                // onClick={() => signInWithGoogle()}
                 colorScheme="twitter"
-               leftIcon={<FaGoogle />}
+                leftIcon={<FaGoogle />}
               ></Button>
               <Button
-               //onClick={() => signInWithTwitter()}
+                //onClick={() => signInWithTwitter()}
                 colorScheme="twitter"
-               leftIcon={<FaTwitter />}
+                leftIcon={<FaTwitter />}
               ></Button>
               <Button
-               // onClick={() => signInWithGithub()}
+                // onClick={() => signInWithGithub()}
                 colorScheme="twitter"
-               leftIcon={<FaGithub />}
+                leftIcon={<FaGithub />}
               ></Button>
             </HStack>
-          </Box> 
+          </Box>
         </Box>
       </Box>
     </Box>

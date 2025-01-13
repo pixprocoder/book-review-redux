@@ -6,11 +6,11 @@ const EditBook = () => {
   const { id } = useParams();
   console.log(id);
   const { data, isLoading, isSuccess } = useSingleBookQuery(id);
-  console.log('inside data',data?.data);
+  console.log("inside data", data?.data);
   console.log(isLoading);
   console.log(isSuccess);
   return (
-    <Box>
+    <Box style={{ minHeight: "85vh" }}>
       <h1 style={{ textAlign: "center" }}>
         you're editing on{" "}
         <span style={{ color: "blue" }}>{data?.data?.title}</span>
