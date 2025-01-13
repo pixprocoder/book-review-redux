@@ -1,26 +1,56 @@
-import {Box, Button, Center, FormControl, FormLabel, Input, Text,} from "@chakra-ui/react";
-import {Link} from "react-router-dom";
-import {createUser} from "../../redux/features/auth/authSlice";
-import {useAppDispatch} from "../../redux/hooks/hooks";
-import {useForm} from "react-hook-form";
+import {
+  Box,
+  Button,
+  Center,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
+import { createUser } from "../../redux/features/auth/authSlice";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useForm } from "react-hook-form";
+import { useAppSelector } from "../../redux/hooks/hooks.ts";
+import { useEffect } from "react";
 
 // import end
 
 function Register() {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   // handling form register
-  const {register, handleSubmit, reset, formState:{errors}} = useForm()
-  const onSubmit = (values:any) => {
-    const {email, password } = values;
-    dispatch(createUser({email, password}))
-    reset()
-  }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (values: any) => {
+    const { email, password } = values;
+    dispatch(createUser({ email, password }));
+    reset();
+  };
 
+  // Redirecting user to homepage after register
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <Box minH="90vh" display="flex" justifyContent="center" alignItems="center">
-      <Box w={{ base: "100%", md: "50%" }} bg="gray.50" p="10" mt="12" rounded="lg" mx="auto">
+      <Box
+        w={{ base: "100%", md: "50%" }}
+        bg="gray.50"
+        p="10"
+        mt="12"
+        rounded="lg"
+        mx="auto"
+      >
         <Center fontSize={33} textColor="blue.400" fontWeight="bold">
           Please Register
         </Center>
@@ -29,48 +59,45 @@ function Register() {
             <FormControl>
               <FormLabel>Your Name *</FormLabel>
               <Input
-                  {...register("name", {required: true})}
-                  aria-invalid={errors.name ? "true" : "false"}
-                  name="name" type="text" />
-              {errors.name?.type === 'required' && (
-                  <Text
-                      fontSize="xs"
-                      role="alert" color="red.500">
-                    Name is required
-                  </Text>
+                {...register("name", { required: true })}
+                aria-invalid={errors.name ? "true" : "false"}
+                name="name"
+                type="text"
+              />
+              {errors.name?.type === "required" && (
+                <Text fontSize="xs" role="alert" color="red.500">
+                  Name is required
+                </Text>
               )}
-
             </FormControl>
             <FormControl>
               <FormLabel mt={4}>Your Email *</FormLabel>
               <Input
-                  {...register("email", {required: true})}
-                  aria-invalid={errors.email ? "true" : "false"}
-                  name="email" type="email" />
+                {...register("email", { required: true })}
+                aria-invalid={errors.email ? "true" : "false"}
+                name="email"
+                type="email"
+              />
 
-              {errors.email?.type === 'required' && (
-                  <Text
-                      fontSize="xs"
-                      role="alert" color="red.500">
-                    Email is required
-                  </Text>
+              {errors.email?.type === "required" && (
+                <Text fontSize="xs" role="alert" color="red.500">
+                  Email is required
+                </Text>
               )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Your Password *</FormLabel>
               <Input
-                  {...register("password", {required: true})}
-                  aria-invalid={errors.password ? "true" : "false"}
+                {...register("password", { required: true })}
+                aria-invalid={errors.password ? "true" : "false"}
                 id="password"
                 name="password"
                 type="password"
               />
-              {errors.password?.type === 'required' && (
-                  <Text
-                      fontSize="xs"
-                      role="alert" color="red.500">
-                    Password is required
-                  </Text>
+              {errors.password?.type === "required" && (
+                <Text fontSize="xs" role="alert" color="red.500">
+                  Password is required
+                </Text>
               )}
             </FormControl>
             <Box my={2} fontSize="xs">

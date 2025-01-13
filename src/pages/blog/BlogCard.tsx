@@ -9,6 +9,7 @@ const BlogPostCard = ({ post }: { post: any }) => {
     const [liked, setLiked] = useState(false);
 
     // @ts-ignore
+    // @ts-ignore
     return (
         <Box
             bg="white"

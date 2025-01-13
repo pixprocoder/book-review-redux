@@ -14,8 +14,6 @@ type IAuthInfo = {
   error: string | null;
 };
 
-
-
 const initialState: IAuthInfo = {
   user: {
     email: null,
@@ -31,7 +29,7 @@ export const createUser = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }) => {
     const data = await createUserWithEmailAndPassword(auth, email!, password!);
     return data.user.email;
-  }
+  },
 );
 
 // login user
@@ -39,9 +37,9 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: { email: string; password: string }) => {
     const data = await signInWithEmailAndPassword(auth, email!, password!);
-  
+
     return data.user.email;
-  }
+  },
 );
 
 export const authSlice = createSlice({
